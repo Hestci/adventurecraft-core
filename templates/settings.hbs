@@ -1,0 +1,80 @@
+<form class="ac-settings-body">
+
+  <section class="ac-settings-section">
+    <h3 class="ac-settings-section-title">
+      <i class="fas fa-user-shield"></i> {{localize "ADVENTURECRAFT.Settings.PermissionsTitle"}}
+    </h3>
+    <p class="ac-settings-hint">{{localize "ADVENTURECRAFT.Settings.PermissionsHint"}}</p>
+    {{#each permissions}}
+      <div class="ac-settings-perm-row">
+        <label class="ac-settings-perm-label" title="{{localize this.hintKey}}">{{localize this.nameKey}}</label>
+        <select name="perm_{{this.key}}" class="ac-settings-perm-select">
+          {{#each this.options}}
+            <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{localize this.labelKey}}</option>
+          {{/each}}
+        </select>
+      </div>
+    {{/each}}
+  </section>
+
+  <section class="ac-settings-section">
+    <h3 class="ac-settings-section-title">
+      <i class="fas fa-bug"></i> {{localize "ADVENTURECRAFT.Settings.DiagnosticsTitle"}}
+    </h3>
+    <label class="ac-settings-type-row">
+      <input type="checkbox" name="debugLogging" {{#if debugLogging}}checked{{/if}}/>
+      <span class="ac-settings-type-label">{{localize "ADVENTURECRAFT.Settings.DebugLoggingName"}}</span>
+    </label>
+    <p class="ac-settings-hint">{{localize "ADVENTURECRAFT.Settings.DebugLoggingHint"}}</p>
+  </section>
+
+  <section class="ac-settings-section">
+    <h3 class="ac-settings-section-title">
+      <i class="fas fa-object-group"></i> {{localize "ADVENTURECRAFT.Settings.CombineItemsTitle"}}
+      <span class="ac-wip-tag">{{localize "ADVENTURECRAFT.Label.WIP"}}</span>
+    </h3>
+    {{#unless bridgeActive}}
+    <p class="ac-settings-hint">{{localize "ADVENTURECRAFT.Settings.BridgeRequiredHint"}}</p>
+    {{/unless}}
+    <label class="ac-settings-type-row">
+      <input type="checkbox" name="enableCombine" {{#if enableCombine}}checked{{/if}} {{#unless bridgeActive}}disabled{{/unless}}/>
+      <span class="ac-settings-type-label">{{localize "ADVENTURECRAFT.Settings.CombineItemsName"}}</span>
+    </label>
+    <p class="ac-settings-hint">{{localize "ADVENTURECRAFT.Settings.CombineItemsHint"}}</p>
+  </section>
+
+  <section class="ac-settings-section">
+    <h3 class="ac-settings-section-title">
+      <i class="fas fa-list-ul"></i> {{localize "ADVENTURECRAFT.Settings.RecipeEditorTitle"}}
+    </h3>
+    <label class="ac-settings-type-row">
+      <input type="checkbox" name="showRecipeResultProps" {{#if showRecipeResultProps}}checked{{/if}} {{#unless bridgeActive}}disabled{{/unless}}/>
+      <span class="ac-settings-type-label">{{localize "ADVENTURECRAFT.Settings.ShowRecipeResultPropsName"}}</span>
+    </label>
+    <p class="ac-settings-hint">{{localize "ADVENTURECRAFT.Settings.ShowRecipeResultPropsHint"}}</p>
+  </section>
+
+  {{#if needsMigration}}
+  <section class="ac-settings-section">
+    <h3 class="ac-settings-section-title" style="color: var(--ac-red);">
+      <i class="fas fa-exclamation-triangle"></i> {{localize "ADVENTURECRAFT.Settings.MigrationTitle"}}
+    </h3>
+    <p class="ac-settings-hint">
+      {{localize "ADVENTURECRAFT.Settings.MigrationHint"}}
+    </p>
+    <button type="button" class="ac-btn-primary" data-action="migrate">
+      <i class="fas fa-database"></i> {{localize "ADVENTURECRAFT.Settings.MigrateButton"}}
+    </button>
+  </section>
+  {{/if}}
+
+  <footer class="ac-settings-footer">
+    <button type="submit" class="ac-btn-primary">
+      <i class="fas fa-save"></i> {{localize "ADVENTURECRAFT.Button.Save"}}
+    </button>
+    <button type="button" class="ac-btn-secondary" data-action="close">
+      {{localize "ADVENTURECRAFT.Button.Cancel"}}
+    </button>
+  </footer>
+
+</form>

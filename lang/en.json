@@ -1,0 +1,424 @@
+{
+  "ADVENTURECRAFT": {
+    "ModuleTitle": "AdventureCraft DnD5e",
+    "ModuleDescription": "A crafting system for DnD5e — combine items and create reusable recipes.",
+
+    "Tab": {
+      "CombineItems": "Combine Items",
+      "CreateRecipe": "Create Recipe",
+      "MyRecipes": "My Recipes",
+      "AllRecipes": "All Recipes"
+    },
+
+    "Button": {
+      "CreateItem": "Create Item",
+      "Create": "Create",
+      "SaveRecipe": "Save Recipe",
+      "Craft": "Craft",
+      "Forget": "Forget",
+      "Edit": "Edit",
+      "Delete": "Delete",
+      "Export": "Export",
+      "Import": "Import",
+      "ManageBooks": "Manage Books",
+      "CreateRecipe": "Create Recipe",
+      "OpenBrowser": "Recipe Browser",
+      "Browse": "Browse...",
+      "Remove": "Remove",
+      "Add": "Add",
+      "Set": "Set",
+      "Close": "Close",
+      "Cancel": "Cancel",
+      "Confirm": "Confirm",
+      "Save": "Save",
+      "AddCritPoolOption": "Add pool option",
+      "SuggestCritPool": "Suggest pool from item type"
+    },
+
+    "Aria": {
+      "RemoveDamageType": "Remove damage type from selection"
+    },
+
+    "Label": {
+      "DropItems": "Drop Items to Combine",
+      "Ingredients": "Ingredients",
+      "ResultItem": "Result Item",
+      "RecipeName": "Recipe Name",
+      "Category": "Category",
+      "ItemName": "New Item Name",
+      "ItemType": "Item Type",
+      "EquipmentSubtype": "Armor / equipment category",
+      "ConsumableSubtype": "Consumable type",
+      "ItemProperty": "dnd5e item property",
+      "ResultItemName": "Result Item Name",
+      "ResultQuantity": "Result Quantity",
+      "ChooseImage": "Choose Image",
+      "ChooseImageResult": "Choose Image for Result",
+      "FromResult": "From result",
+      "FromItem": "From: {name}",
+      "Activities": "Activities",
+      "AdditionalProps": "Additional Properties",
+      "ResultProps": "Result Properties",
+      "MasteryThreshold": "Crafts to master",
+      "CheckType": "Check Type",
+      "Ability": "Ability",
+      "Skill": "Skill",
+      "Tool": "Tool",
+      "DC": "DC",
+      "OnFailure": "On Failure",
+      "CritThreshold": "Crit Threshold",
+      "CritSuccess": "Crit Success",
+      "CritPoolPresentMode": "Offer mode",
+      "CritPoolPresentCount": "Random offer count",
+      "CritPoolSizeFormula": "Size roll (optional)",
+      "CritPoolSizeTable": "Size table JSON",
+      "CritPoolOptionType": "Option type",
+      "CritPoolOptionLabel": "Display label",
+      "BonusQuantity": "Bonus Quantity",
+      "Property": "Property",
+      "PropertyValue": "Value",
+      "DamageFormula": "Damage Formula",
+      "DamageType": "Damage Type",
+      "DamageTypes": "Damage types",
+      "CritDamageFieldset": "Bonus damage (critical success)",
+      "DamageTypePickPlaceholder": "Add damage type…",
+      "PropertyCustomPath": "Custom path (system.*)",
+      "RecipeBook": "Recipe Book",
+      "Quantity": "Qty",
+      "CritQualityNames": "Quality epithets on critical craft",
+      "Tags": "Alt. names (tags)",
+      "Search": "Search",
+      "WIP": "WIP"
+    },
+
+    "Hint": {
+      "DragItemsHere": "Drag items here from actor sheet or compendium",
+      "DropIngredientsHere": "Drop ingredient items here",
+      "DropResultHere": "Drop result item template here",
+      "DropToolHere": "Drop tool here",
+      "SearchRecipes": "Search recipes…",
+      "SearchPlaceholder": "Search…",
+      "AllCategories": "All categories",
+      "AllBooks": "All books",
+      "NoRecipes": "No recipes saved yet. Create recipes in the Crafting window.",
+      "NoEditableProps": "No editable properties found.",
+      "EnterItemName": "Enter item name...",
+      "EnterRecipeName": "Enter recipe name...",
+      "CategoryPlaceholder": "e.g. Potions, Weapons…",
+      "ResultItemNamePlaceholder": "Result item name...",
+      "TagsPlaceholder": "tags: gem, metal…",
+      "TagsTooltip": "Tags (comma-separated): item can match by name OR any listed tag",
+      "Optional": "(optional)",
+      "CritThresholdHint": "crit ≥ DC+N",
+      "CritThresholdTitle": "Critical craft success when roll total ≥ DC + N (default 5). On a failed check, critical failure when total ≤ DC − N. Large N makes crit success very rare.",
+      "PropertyHint": "system.*",
+      "DamageTypeOptional": "optional",
+      "DamageTypeMulti": "Choose types from the list below; each appears as a tag above. On a critical craft success one checked type is chosen at random.",
+      "DamageTypeMultiTitle": "Optional. If none are checked, a default is used when applying the bonus (weapon → slashing, otherwise force).",
+      "NoBookOption": "— No Book —",
+      "CanCraftWithout": "Can craft without tool",
+      "Fallback": "Fallback",
+      "NoBook": "— No Book —",
+      "SelectActivities": "Select activities to include in the new item.",
+      "SelectProps": "Check properties to include. Values can be edited.",
+      "DropIngredientsForRecipe": "Drop items that are required to craft the result.",
+      "DropResultTemplate": "Drop an item as a template.",
+      "CheckResultProps": "Check properties to include in the crafted result. Edit values as needed.",
+      "CritAuto": "Uses the result item type to pick a default bonus (dnd5e 4.4+ fields).",
+      "CritPool": "Define several possible bonuses. On a critical success, the crafter picks one option (or skips). Optional size roll JSON maps die total → how many random options are shown.",
+      "CritPoolLabelOptional": "Button label (optional)",
+      "CritQualityNamesTitle": "On critical craft success: random quality word in the new item name and an extra line in the craft chat message."
+    },
+
+    "Dialog": {
+      "SuggestCritPoolTitle": "Replace crit pool?",
+      "SuggestCritPoolContent": "Replace current pool options with suggestions for this result item type?",
+      "CombineItemsTitle": "Combine Items",
+      "CombineItemsContent": "Create <strong>{name}</strong>?",
+      "ConsumeNote": "Will be consumed: {items}",
+      "ConfirmCraftTitle": "Confirm Craft",
+      "ConfirmCraftContent": "Craft <strong>{name}</strong> using ingredients?",
+      "ConfirmCraftWithCheck": "Requires {type} check (DC {dc}).",
+      "ConfirmCraftMasteryGuaranteed": "You have mastered this recipe — the craft check succeeds automatically (no roll, no critical success).",
+      "ConfirmCraftMasteryCritRoll": "You have mastered this recipe — success is automatic. A check will be rolled for critical success only (failure is not possible).",
+      "DeleteRecipeTitle": "Delete Recipe",
+      "DeleteRecipeContent": "Delete recipe <strong>{name}</strong>? This cannot be undone.",
+      "ForgetRecipeTitle": "Forget Recipe",
+      "ForgetRecipeContent": "Remove recipe <strong>{name}</strong> from {actor}'s inventory?<br/><em style=\"font-size:0.85rem;color:#aaa\">World recipe will remain untouched.</em>",
+      "DeleteBookTitle": "Delete Book",
+      "DeleteBookContent": "Delete book <strong>{name}</strong>?<br/>Recipes will remain but lose book association.",
+      "ManageBooksTitle": "Recipe Books",
+      "NewBookPlaceholder": "New book name…",
+      "NoBooksYet": "No books yet.",
+      "TagsPrompt": "Comma-separated tags for ingredient matching (e.g. gem, red):",
+      "CritPoolTitle": "Critical craft bonus",
+      "CritPoolContent": "Choose one bonus, or skip.",
+      "CritPoolSkip": "Skip bonus"
+    },
+
+    "Mastery": {
+      "SectionTitle": "Recipe mastery",
+      "Enable": "Track mastery (auto-success on craft check)",
+      "ThresholdHint": "Successful crafts needed before the check auto-succeeds.",
+      "Progress": "{count} / {threshold}",
+      "BadgeMaster": "Mastered",
+      "AllowCritRoll": "At mastery: roll for critical success (success is still automatic)"
+    },
+
+    "Message": {
+      "ItemCreated": "Created item \"{name}\" → {destination}.",
+      "RecipeSaved": "Recipe saved!",
+      "RecipeUpdated": "Recipe updated!",
+      "MissingIngredients": "Missing ingredients: {list}",
+      "CraftSuccess": "Crafted \"{name}\"{qtyLabel}{critLabel}!",
+      "CraftFailed": "Craft failed!",
+      "CraftFailedKeep": "Craft failed! Ingredients kept.",
+      "CraftFailedConsume": "Craft failed! Ingredients consumed.",
+      "CritSuccess": "Crit success: {label}",
+      "CritSuccessGeneric": "Critical success!",
+      "CritPoolSkipped": "Critical craft success — bonus effect skipped.",
+      "CritFail": "Critical failure!",
+      "CritFailConsume": "Critical failure! Ingredients consumed.",
+      "IngredientsConsumed": "Ingredients consumed.",
+      "IngredientsKept": "Ingredients kept.",
+      "NoRecipesFor": "{actor} has no recipes yet.",
+      "NoRecipesGeneric": "No available recipes.",
+      "NoCraftingPermissions": "You have no permission to use Combine Items or Create Recipe. Ask the GM to raise your role or change AdventureCraft permissions.",
+      "NoRecipesYet": "No recipes yet. Create the first one!",
+      "OtherRecipes": "Other Recipes",
+      "BookRenamed": "Book renamed: {name}",
+      "BookDeleted": "Book «{name}» deleted.",
+      "RecipeDeleted": "Recipe \"{name}\" deleted.",
+      "RecipeForgotten": "Recipe \"{name}\" removed from inventory.",
+      "RecipesImported": "Imported {count} recipe(s).",
+      "ImportError": "Import error. Check file format.",
+      "ImportFailed": "Failed to import recipes. Check the file format.",
+      "NoActorSelected": "No actor selected. Open the crafting window from an actor sheet.",
+      "NoActiveCharacter": "No active character. Open the hub from a character sheet.",
+      "ToolNotFound": "Tool «{tool}» not found — rolling without tool.",
+      "ToolRequired": "Tool required for crafting: {tool}",
+      "CreateFirstRecipe": "Create first recipe",
+      "IngredientWithTags": "{name} (or matching tags: {tags})",
+      "TagsSet": "Tags set: {tags}",
+      "TagsCleared": "Tags cleared.",
+      "ChatCraftPlain": "<p><strong>{actor}</strong> crafted <em>{name}</em>{qtyLabel}.</p>",
+      "ChatCraftCrit": "<p><strong>{actor}</strong> crafted <em>{name}</em>{qtyLabel}. <strong>{quality}</strong> — {highQuality}!</p>{critDetail}",
+      "ChatCraftCritStacked": "<p><strong>{actor}</strong> added <strong>×{qty}</strong> to <em>{name}</em> (stack). <strong>{quality}</strong> — {highQuality}!</p>{critDetail}"
+    },
+
+    "Quality": {
+      "WordPool": "Superb|Exceptional|Masterwork|Flawless|Peerless|Brilliant|Immaculate|Exquisite|Perfect|Unrivaled|Resplendent|Magnificent",
+      "NameFormat": "{quality} {name}",
+      "HighQualityPhrase": "exceptional craftsmanship"
+    },
+
+    "Check": {
+      "TypeNone": "None",
+      "TypeAbility": "Ability Check",
+      "TypeSkill": "Skill Check",
+      "TypeTool": "Tool Check"
+    },
+
+    "OnFailure": {
+      "Consume": "Consume ingredients",
+      "Keep": "Keep ingredients"
+    },
+
+    "CritAuto": {
+      "Preview": "Currently: {summary}",
+      "PreviewNoResult": "Add a result item to see the auto bonus preview."
+    },
+
+    "CritSuccess": {
+      "TypeBonus": "Bonus Items",
+      "TypeProperty": "Item Property",
+      "TypeDamage": "Bonus Damage",
+      "TypeItemProperty": "dnd5e Property",
+      "TypeAuto": "Auto (by result item)",
+      "TypePool": "Pool (player picks)",
+      "PropertyDelta": "+{value} to {prop}",
+      "BonusDamageLabel": "bonus damage",
+      "ToolBonusDelta": "tool bonus {formula}",
+      "RandomDamageTypePick": "{picked} (random from {list})",
+      "PreviewQty": "+{qty} to quantity",
+      "PreviewProperty": "{prop} ({mode} {value})",
+      "PreviewDamage": "+{formula} damage ({types})",
+      "PreviewItemProperty": "add property: {property}",
+      "PreviewUnknown": "unknown bonus",
+      "ItemPropertyApplied": "property: {property}"
+    },
+
+    "CritProperty": {
+      "choose": "— Choose —",
+      "customPath": "Custom path…",
+      "armorValue": "Armor: AC (armor.value)",
+      "armorMagicalBonus": "Armor: magic +AC (armor.magicalBonus)",
+      "armorDex": "Armor: max DEX (armor.dex)",
+      "strength": "Armor: min STR (strength)",
+      "toolBonus": "Tool: roll bonus (bonus)",
+      "quantity": "Stack: quantity",
+      "usesMax": "Uses: max charges (uses.max)",
+      "weightValue": "Weight (weight.value)"
+    },
+
+    "CritPool": {
+      "PresentRandom": "Random subset",
+      "PresentFull": "Full pool",
+      "LabelProperty": "{prop} ({mode} {value})",
+      "LabelDamage": "{formula} ({dmgType})",
+      "LabelItemProperty": "property: {property}"
+    },
+
+    "PropertyMode": {
+      "Add": "Add",
+      "Set": "Set"
+    },
+
+    "Activity": {
+      "attack": "Attack",
+      "heal": "Healing",
+      "damage": "Damage",
+      "save": "Saving Throw",
+      "check": "Check",
+      "utility": "Utility",
+      "cast": "Spell",
+      "enchant": "Enchantment",
+      "summon": "Summon",
+      "transform": "Transform",
+      "forward": "Forward"
+    },
+
+    "AttackType": {
+      "melee": "melee",
+      "ranged": "ranged"
+    },
+
+    "ActivitySummary": {
+      "HealingFormula": "{formula} healing",
+      "DCFormula": "DC {dc}"
+    },
+
+    "Tool": {
+      "alchemist": "Alchemist's Supplies",
+      "brewer": "Brewer's Supplies",
+      "calligrapher": "Calligrapher's Supplies",
+      "carpenter": "Carpenter's Tools",
+      "cartographer": "Cartographer's Tools",
+      "cobbler": "Cobbler's Tools",
+      "cook": "Cook's Utensils",
+      "glassblower": "Glassblower's Tools",
+      "jeweler": "Jeweler's Tools",
+      "leatherworker": "Leatherworker's Tools",
+      "mason": "Mason's Tools",
+      "painter": "Painter's Supplies",
+      "potter": "Potter's Tools",
+      "smith": "Smith's Tools",
+      "tinker": "Tinker's Tools",
+      "weaver": "Weaver's Tools",
+      "woodcarver": "Woodcarver's Tools",
+      "disguise": "Disguise Kit",
+      "forgery": "Forgery Kit",
+      "gaming": "Gaming Set",
+      "herbalism": "Herbalism Kit",
+      "musical": "Musical Instrument",
+      "navigator": "Navigator's Tools",
+      "poisoner": "Poisoner's Kit",
+      "thieves": "Thieves' Tools"
+    },
+
+    "Role": {
+      "Player": "Player",
+      "Trusted": "Trusted Player",
+      "Assistant": "Assistant GM",
+      "Gamemaster": "Gamemaster"
+    },
+
+    "Settings": {
+      "Title": "AdventureCraft — Settings",
+      "PermissionsTitle": "Permissions",
+      "PermissionsHint": "Choose the minimum role required for each operation. Users below the threshold won't see the UI and can't trigger the action.",
+      "Perm": {
+        "createRecipeName": "Create recipes",
+        "createRecipeHint": "Saving new world recipes from the «Create Recipe» tab. Crafting from recipes the character already knows (My Recipes) does not use this permission.",
+        "createBookName": "Manage recipe books",
+        "createBookHint": "Create, rename, and delete recipe books.",
+        "editAnyRecipeName": "Edit any recipe",
+        "editAnyRecipeHint": "Edit recipes that don't belong to this user.",
+        "deleteAnyRecipeName": "Delete any recipe",
+        "deleteAnyRecipeHint": "Delete recipes from the world (not just from inventory).",
+        "viewAllRecipesName": "View all recipes",
+        "viewAllRecipesHint": "Show the «All Recipes» tab in the Hub.",
+        "importExportName": "Export / Import",
+        "importExportHint": "Export and import recipe JSON.",
+        "combineItemsName": "Combine items",
+        "combineItemsHint": "Use the «Combine Items» tab (requires the feature toggle)."
+      },
+
+      "DebugLoggingName": "Debug Logging",
+      "DebugLoggingHint": "Logs combine/recipe debug plus each craft check: DC, crit threshold, roll total, d20 (if any), and whether crit success fired (total ≥ DC + threshold, not nat 20 alone).",
+      "CombineItemsName": "Enable Combine Items",
+      "CombineItemsHint": "Enable the «Combine Items» tab (experimental feature).",
+      "RecipeEditorTitle": "Recipe editor",
+      "ShowRecipeResultPropsName": "Show result property editor",
+      "ShowRecipeResultPropsHint": "On the «Create Recipe» tab, show the long list of template fields as a collapsible section. When off, the full item template is kept and recipes do not expose per-field overrides in the UI.",
+      "MigrationTitle": "Data Migration",
+      "MigrationHint": "Old format recipes detected (world settings). Click the button below to transfer them to Foundry items. Old data will remain in settings as a backup.",
+      "MigrationDetected": "AdventureCraft: old format recipes detected. Open AdventureCraft settings to migrate.",
+      "MigrateButton": "Migrate recipes to items",
+      "MigrationComplete": "Migration complete — {bookCount} books, {recipeCount} recipes transferred to items.",
+      "SettingsSaved": "AdventureCraft settings saved.",
+      "DiagnosticsTitle": "Diagnostics",
+      "CombineItemsTitle": "Combine Items",
+      "MenuName": "AdventureCraft Settings",
+      "MenuLabel": "Configure",
+      "MenuHint": "Configure permissions, diagnostics, and recipe editor options.",
+      "BridgeRequiredHint": "Enable the adventurecraft-dnd5e bridge module to change combine and recipe editor options."
+    },
+
+    "Status": {
+      "InDevelopment": "In Development",
+      "FeatureDisabled": "Item combination feature is temporarily disabled.",
+      "EnableInSettings": "Enable it in <strong>Module Settings → AdventureCraft → Configure</strong>.",
+      "Requires": "Requires:",
+      "RequiresCheck": "Requires {type} check DC{dc}",
+      "NeedsQuantity": "need {quantity}, have {have}",
+      "RecipeBookBadge": "Recipe Book"
+    },
+
+    "Hub": {
+      "Title": "AdventureCraft Hub",
+      "ManageBooks": "Books",
+      "Export": "Export all recipes",
+      "Import": "Import recipes from JSON",
+      "ExportTooltip": "Export all recipes",
+      "ImportTooltip": "Import recipes from JSON"
+    },
+
+    "Sidebar": {
+      "OpenHub": "AdventureCraft",
+      "OpenTags": "AdventureCraft Tags"
+    },
+
+    "Window": {
+      "CraftingTitle": "Crafting"
+    },
+
+    "Error": {
+      "OnlyItems": "Only items can be dropped here.",
+      "DropOneItem": "Drop at least one item before creating.",
+      "EnterItemName": "Please enter a name for the new item.",
+      "EnterRecipeName": "Please enter a recipe name.",
+      "AddIngredient": "Add at least one ingredient.",
+      "NeedRecipeResultForCritPool": "Add a result item before suggesting a crit pool.",
+      "NoPermission": "You don't have permission for this action.",
+      "BridgeRequired": "Enable the adventurecraft-dnd5e bridge module to create or edit recipes.",
+      "CritPoolEmpty": "Crit pool must include at least one option.",
+      "CritPoolInvalidOption": "Invalid crit pool option #{index}.",
+      "CritPoolSizeTable": "Size roll requires a non-empty JSON table.",
+      "CritPoolSizeRow": "Invalid size table row #{row}.",
+      "CritPoolSizeRowRange": "Size table row #{row}: min cannot exceed max.",
+      "CritPoolSizeJson": "Size table must be valid JSON array.",
+      "MasteryNeedsCheck": "Enable a craft check before using recipe mastery."
+    }
+  }
+}

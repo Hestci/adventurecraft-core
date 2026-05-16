@@ -1,0 +1,82 @@
+<div class="ac-recipe-browser">
+
+  <div class="ac-browser-toolbar">
+    {{#if canImportExport}}
+    <button type="button" class="ac-btn-secondary ac-btn-export" title="{{localize "ADVENTURECRAFT.Hub.ExportTooltip"}}">
+      <i class="fas fa-file-export"></i> {{localize "ADVENTURECRAFT.Button.Export"}}
+    </button>
+    <label class="ac-btn-secondary ac-btn-import-label" title="{{localize "ADVENTURECRAFT.Hub.ImportTooltip"}}">
+      <i class="fas fa-file-import"></i> {{localize "ADVENTURECRAFT.Button.Import"}}
+      <input type="file" class="ac-import-file" accept=".json" style="display:none"/>
+    </label>
+    {{/if}}
+  </div>
+
+  <div class="ac-filter-bar">
+    <input type="text" class="ac-search" placeholder="{{localize "ADVENTURECRAFT.Hint.SearchRecipes"}}" value="{{searchQuery}}" />
+    <select class="ac-category-filter">
+      <option value="">{{localize "ADVENTURECRAFT.Hint.AllCategories"}}</option>
+      {{#each categories}}
+        <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  {{#if recipes.length}}
+    <ul class="ac-recipe-list">
+      {{#each recipes}}
+        <li class="ac-recipe-card" data-recipe-id="{{this.id}}">
+          <div class="ac-recipe-header">
+            <img src="{{this.result.img}}" alt="{{this.name}}" width="40" height="40" />
+            <div class="ac-recipe-info">
+              <div class="ac-recipe-name-row">
+                <strong class="ac-recipe-name">{{this.name}}</strong>
+                {{#if this.category}}<span class="ac-category-badge">{{this.category}}</span>{{/if}}
+              </div>
+              <span class="ac-recipe-result-name">→ {{this.result.name}} [{{this.result.type}}]</span>
+            </div>
+            <div class="ac-recipe-actions">
+              <button type="button" class="ac-btn-craft" data-recipe-id="{{this.id}}">
+                <i class="fas fa-hammer"></i> {{localize "ADVENTURECRAFT.Button.Craft"}}
+              </button>
+              {{#if ../canEditAnyRecipe}}
+              <button type="button" class="ac-btn-edit" data-recipe-id="{{this.id}}" title="{{localize "ADVENTURECRAFT.Button.Edit"}}">
+                <i class="fas fa-edit"></i>
+              </button>
+              {{/if}}
+              {{#if ../canDeleteAnyRecipe}}
+              <button type="button" class="ac-btn-delete" data-recipe-id="{{this.id}}" title="{{localize "ADVENTURECRAFT.Button.Delete"}}">
+                <i class="fas fa-trash"></i>
+              </button>
+              {{/if}}
+            </div>
+          </div>
+
+          {{#if this.check.type}}
+            <div class="ac-recipe-check-badge">
+              <i class="fas fa-dice-d20"></i>
+              {{this.check.type}} {{localize "ADVENTURECRAFT.ActivitySummary.DCFormula" dc=this.check.dc}}
+            </div>
+          {{/if}}
+
+          <div class="ac-recipe-ingredients">
+            <span class="ac-label">{{localize "ADVENTURECRAFT.Status.Requires"}}</span>
+            {{#each this.ingredients}}
+              <span class="ac-ingredient" title="{{this.name}}">
+                <img src="{{this.img}}" alt="{{this.name}}" width="20" height="20" />
+                {{this.name}} ×{{this.quantity}}
+              </span>
+            {{/each}}
+          </div>
+
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <div class="ac-empty-state">
+      <i class="fas fa-scroll"></i>
+      <p>{{localize "ADVENTURECRAFT.Hint.NoRecipes"}}</p>
+    </div>
+  {{/if}}
+
+</div>

@@ -1,0 +1,425 @@
+{
+  "ADVENTURECRAFT": {
+    "ModuleTitle": "AdventureCraft DnD5e",
+    "ModuleDescription": "Система крафтинга для DnD5e — объединяйте предметы и создавайте многоразовые рецепты.",
+
+    "Tab": {
+      "CombineItems": "Объединение предметов",
+      "CreateRecipe": "Создание рецепта",
+      "MyRecipes": "Мои рецепты",
+      "AllRecipes": "Все рецепты"
+    },
+
+    "Button": {
+      "CreateItem": "Создать предмет",
+      "Create": "Создать",
+      "SaveRecipe": "Сохранить рецепт",
+      "Craft": "Скрафтить",
+      "Forget": "Забыть рецепт",
+      "Edit": "Редактировать",
+      "Delete": "Удалить",
+      "Export": "Экспортировать",
+      "Import": "Импортировать",
+      "ManageBooks": "Управление книгами рецептов",
+      "CreateRecipe": "Создать рецепт",
+      "OpenBrowser": "Список рецептов",
+      "Browse": "Обзор...",
+      "Remove": "Убрать",
+      "Add": "Добавить",
+      "Set": "Установить",
+      "Close": "Закрыть",
+      "Cancel": "Отмена",
+      "Confirm": "Подтвердить",
+      "Save": "Сохранить",
+      "AddCritPoolOption": "Добавить вариант пула",
+      "SuggestCritPool": "Предложить пул по типу предмета"
+    },
+
+    "Aria": {
+      "RemoveDamageType": "Убрать тип урона из списка"
+    },
+
+    "Label": {
+      "DropItems": "Предметы для объединения",
+      "Ingredients": "Ингредиенты",
+      "ResultItem": "Результирующий предмет",
+      "RecipeName": "Название рецепта",
+      "Category": "Категория",
+      "ItemName": "Название нового предмета",
+      "ItemType": "Тип предмета",
+      "EquipmentSubtype": "Категория брони / снаряжения",
+      "ConsumableSubtype": "Тип расходника",
+      "ItemProperty": "Свойство dnd5e",
+      "ResultItemName": "Название результата",
+      "ResultQuantity": "Количество",
+      "ChooseImage": "Выберите изображение",
+      "ChooseImageResult": "Выберите изображение результата",
+      "FromResult": "Из результата",
+      "FromItem": "Из: {name}",
+      "Activities": "Способности (Activities)",
+      "AdditionalProps": "Дополнительные свойства",
+      "ResultProps": "Свойства результата",
+      "CraftCheck": "Проверка крафта",
+      "MasteryThreshold": "Крафтов до мастерства",
+      "CheckType": "Тип проверки",
+      "Ability": "Характеристика",
+      "Skill": "Навык",
+      "Tool": "Инструмент",
+      "DC": "СЛ",
+      "OnFailure": "При провале",
+      "CritThreshold": "Крит. порог",
+      "CritSuccess": "Крит. успех",
+      "CritPoolPresentMode": "Режим предложения",
+      "CritPoolPresentCount": "Число случайных вариантов",
+      "CritPoolSizeFormula": "Бросок размера (необяз.)",
+      "CritPoolSizeTable": "Таблица размера (JSON)",
+      "CritPoolOptionType": "Тип варианта",
+      "CritPoolOptionLabel": "Подпись кнопки",
+      "BonusQuantity": "Доп. количество",
+      "Property": "Свойство",
+      "PropertyValue": "Значение",
+      "DamageFormula": "Формула урона",
+      "DamageType": "Тип урона",
+      "DamageTypes": "Типы урона",
+      "CritDamageFieldset": "Доп. урон при крите",
+      "DamageTypePickPlaceholder": "Добавить тип урона…",
+      "PropertyCustomPath": "Свой путь (system.*)",
+      "RecipeBook": "Книга рецептов",
+      "Quantity": "Кол-во",
+      "CritQualityNames": "Эпитеты качества при крите",
+      "Tags": "Альт. названия (теги)",
+      "Search": "Поиск",
+      "WIP": "В разработке"
+    },
+
+    "Hint": {
+      "DragItemsHere": "Перетащите предметы сюда из листа персонажа или компендиума",
+      "DropIngredientsHere": "Перетащи предметы-ингредиенты сюда",
+      "DropResultHere": "Перетащи шаблон результирующего предмета",
+      "DropToolHere": "Перетащи инструмент сюда",
+      "SearchRecipes": "Поиск рецептов…",
+      "SearchPlaceholder": "Поиск…",
+      "AllCategories": "Все категории",
+      "AllBooks": "Все книги",
+      "NoRecipes": "Рецептов ещё нет. Создайте первый в окне крафта.",
+      "NoEditableProps": "Редактируемых свойств не найдено.",
+      "EnterItemName": "Введите название предмета...",
+      "EnterRecipeName": "Введите название рецепта...",
+      "CategoryPlaceholder": "например: Зелья, Оружие…",
+      "ResultItemNamePlaceholder": "Название результата...",
+      "TagsPlaceholder": "теги: самоцвет, металл…",
+      "TagsTooltip": "Теги (через запятую): предмет может совпасть по имени ИЛИ по любому тегу",
+      "Optional": "(необязательно)",
+      "CritThresholdHint": "крит ≥ СЛ+N",
+      "CritThresholdTitle": "Крит. успех крафта: итог ≥ СЛ + N (часто 5). Крит. провал при провале: итог ≤ СЛ − N. Большое N почти убирает крит.",
+      "PropertyHint": "system.*",
+      "DamageTypeOptional": "необязательно",
+      "DamageTypeMulti": "Выбирай типы из списка ниже — каждый появится плашкой над списком. При критическом успехе крафта случайно берётся один из добавленных типов.",
+      "DamageTypeMultiTitle": "Необязательно. Если ничего не отмечено, при применении бонуса подставляется тип по умолчанию (оружие — рубящий, иначе силовой).",
+      "NoBookOption": "— Без книги —",
+      "CanCraftWithout": "Можно без инструмента",
+      "Fallback": "Фоллбэк",
+      "NoBook": "— Без книги —",
+      "SelectActivities": "Выберите activities, которые войдут в создаваемый предмет.",
+      "SelectProps": "Отметьте свойства для включения. Значения можно редактировать.",
+      "DropIngredientsForRecipe": "Перетащи сюда предметы, нужные для крафта результата.",
+      "DropResultTemplate": "Перетащи предмет как шаблон результата.",
+      "CheckResultProps": "Отметьте свойства, которые войдут в результат. Значения можно редактировать.",
+      "CritAuto": "Бонус выбирается по типу результата (поля dnd5e 4.4+).",
+      "CritPool": "Несколько возможных бонусов. При крите крафтер выбирает один (или пропускает). Необязательный бросок размера: JSON-таблица сопоставляет итог куба числу случайных вариантов.",
+      "CritPoolLabelOptional": "Подпись кнопки (необяз.)",
+      "CritQualityNamesTitle": "При крите: случайный эпитет в имени нового предмета и доп. строка в чате о крафте."
+    },
+
+    "Dialog": {
+      "SuggestCritPoolTitle": "Заменить пул крита?",
+      "SuggestCritPoolContent": "Заменить текущие варианты пула предложениями для типа результата?",
+      "CombineItemsTitle": "Объединить предметы",
+      "CombineItemsContent": "Создать <strong>{name}</strong>?",
+      "ConsumeNote": "Будут потрачены: {items}",
+      "ConfirmCraftTitle": "Подтвердить крафт",
+      "ConfirmCraftContent": "Скрафтить <strong>{name}</strong>?",
+      "ConfirmCraftWithCheck": "Требуется проверка {type} (СЛ {dc}).",
+      "ConfirmCraftMasteryGuaranteed": "Вы постигли этот рецепт — проверка крафта автоматически успешна (без броска и без критического успеха).",
+      "ConfirmCraftMasteryCritRoll": "Вы постигли этот рецепт — успех автоматический. Бросок только на критический успех (провал невозможен).",
+      "DeleteRecipeTitle": "Удалить рецепт",
+      "DeleteRecipeContent": "Удалить рецепт <strong>{name}</strong>? Это действие нельзя отменить.",
+      "ForgetRecipeTitle": "Забыть рецепт",
+      "ForgetRecipeContent": "Убрать рецепт <strong>{name}</strong> из инвентаря {actor}?<br/><em style=\"font-size:0.85rem;color:#aaa\">Мировой рецепт останется нетронутым.</em>",
+      "DeleteBookTitle": "Удалить книгу",
+      "DeleteBookContent": "Удалить книгу <strong>{name}</strong>?<br/>Рецепты останутся, но потеряют привязку к книге.",
+      "ManageBooksTitle": "Книги рецептов",
+      "NewBookPlaceholder": "Название новой книги…",
+      "NoBooksYet": "Книг пока нет.",
+      "TagsPrompt": "Теги через запятую для подбора ингредиентов (например: самоцвет, красный):",
+      "CritPoolTitle": "Бонус за критический крафт",
+      "CritPoolContent": "Выберите один бонус или пропустите.",
+      "CritPoolSkip": "Пропустить бонус"
+    },
+
+    "Mastery": {
+      "SectionTitle": "Мастерство рецепта",
+      "Enable": "Считать мастерство (автоуспех проверки крафта)",
+      "ThresholdHint": "Сколько успешных крафтов нужно до автоматического успеха проверки.",
+      "Progress": "{count} / {threshold}",
+      "BadgeMaster": "Мастер",
+      "AllowCritRoll": "При мастерстве: бросок на критический успех (успех всё равно автоматический)"
+    },
+
+    "Message": {
+      "ItemCreated": "Создан предмет \"{name}\" → {destination}.",
+      "RecipeSaved": "Рецепт сохранён!",
+      "RecipeUpdated": "Рецепт обновлён!",
+      "MissingIngredients": "Не хватает ингредиентов: {list}",
+      "CraftSuccess": "Создан предмет \"{name}\"{qtyLabel}{critLabel}!",
+      "CraftFailed": "Крафт провален!",
+      "CraftFailedKeep": "Крафт провален! Ингредиенты сохранены.",
+      "CraftFailedConsume": "Крафт провален! Ингредиенты израсходованы.",
+      "CritSuccess": "Крит. успех: {label}",
+      "CritSuccessGeneric": "Критический успех!",
+      "CritPoolSkipped": "Критический крафт — бонус не применён.",
+      "CritFail": "Критический провал!",
+      "CritFailConsume": "Критический провал! Ингредиенты израсходованы.",
+      "IngredientsConsumed": "Ингредиенты израсходованы.",
+      "IngredientsKept": "Ингредиенты сохранены.",
+      "NoRecipesFor": "У {actor} пока нет рецептов.",
+      "NoRecipesGeneric": "Нет доступных рецептов.",
+      "NoCraftingPermissions": "Нет прав на вкладки «Объединение» и «Создание рецепта». Попросите GM повысить роль или изменить разрешения AdventureCraft.",
+      "NoRecipesYet": "Рецептов ещё нет. Создайте первый!",
+      "OtherRecipes": "Прочие рецепты",
+      "BookRenamed": "Книга переименована: {name}",
+      "BookDeleted": "Книга «{name}» удалена.",
+      "RecipeDeleted": "Рецепт \"{name}\" удалён.",
+      "RecipeForgotten": "Рецепт \"{name}\" удалён из инвентаря.",
+      "RecipesImported": "Импортировано рецептов: {count}.",
+      "ImportError": "Ошибка импорта. Проверьте формат файла.",
+      "ImportFailed": "Не удалось импортировать рецепты. Проверьте формат файла.",
+      "NoActorSelected": "Актёр не выбран. Откройте окно крафта с листа персонажа.",
+      "NoActiveCharacter": "Нет активного персонажа. Откройте хаб с листа персонажа.",
+      "ToolNotFound": "Инструмент «{tool}» не найден — бросок без инструмента.",
+      "ToolRequired": "Для крафта требуется инструмент: {tool}",
+      "CreateFirstRecipe": "Создать первый рецепт",
+      "IngredientWithTags": "{name} (или с тегами: {tags})",
+      "TagsSet": "Теги установлены: {tags}",
+      "TagsCleared": "Теги очищены.",
+      "ChatCraftPlain": "<p><strong>{actor}</strong> изготовил(а) <em>{name}</em>{qtyLabel}.</p>",
+      "ChatCraftCrit": "<p><strong>{actor}</strong> изготовил(а) <em>{name}</em>{qtyLabel}. <strong>{quality}</strong> — {highQuality}!</p>{critDetail}",
+      "ChatCraftCritStacked": "<p><strong>{actor}</strong> добавил(а) к запасу <em>{name}</em> ещё <strong>×{qty}</strong>. <strong>{quality}</strong> — {highQuality}!</p>{critDetail}"
+    },
+
+    "Quality": {
+      "WordPool": "Превосходный|Исключительный|Безупречный|Мастерский|Великолепный|Идеальный|Совершенный|Выдающийся|Доскональный|Блистательный|Непревзойдённый|Чудесный",
+      "NameFormat": "{quality} {name}",
+      "HighQualityPhrase": "высокое качество изготовления"
+    },
+
+    "Check": {
+      "TypeNone": "Без проверки",
+      "TypeAbility": "Проверка характеристики",
+      "TypeSkill": "Проверка навыка",
+      "TypeTool": "Проверка инструмента"
+    },
+
+    "OnFailure": {
+      "Consume": "Израсходовать ингредиенты",
+      "Keep": "Сохранить ингредиенты"
+    },
+
+    "CritAuto": {
+      "Preview": "Сейчас: {summary}",
+      "PreviewNoResult": "Добавьте предмет-результат, чтобы увидеть превью авто-бонуса."
+    },
+
+    "CritSuccess": {
+      "TypeBonus": "Доп. предметы",
+      "TypeProperty": "Свойство предмета",
+      "TypeDamage": "Доп. урон",
+      "TypeItemProperty": "Свойство dnd5e",
+      "TypeAuto": "Авто (по типу результата)",
+      "TypePool": "Пул (выбор игрока)",
+      "PropertyDelta": "+{value} к {prop}",
+      "BonusDamageLabel": "доп. урон",
+      "ToolBonusDelta": "бонус инструмента {formula}",
+      "RandomDamageTypePick": "{picked} (случайно из: {list})",
+      "PreviewQty": "+{qty} к количеству",
+      "PreviewProperty": "{prop} ({mode} {value})",
+      "PreviewDamage": "+{formula} урон ({types})",
+      "PreviewItemProperty": "свойство: {property}",
+      "PreviewUnknown": "неизвестный бонус",
+      "ItemPropertyApplied": "свойство: {property}"
+    },
+
+    "CritProperty": {
+      "choose": "— Выберите —",
+      "customPath": "Свой путь…",
+      "armorValue": "Доспех: КБ (armor.value)",
+      "armorMagicalBonus": "Доспех: маг. +КБ (armor.magicalBonus)",
+      "armorDex": "Доспех: макс. DEX (armor.dex)",
+      "strength": "Доспех: мин. СИЛ (strength)",
+      "toolBonus": "Инструмент: бонус к броску (bonus)",
+      "quantity": "Стак: количество (quantity)",
+      "usesMax": "Заряды: максимум (uses.max)",
+      "weightValue": "Вес (weight.value)"
+    },
+
+    "CritPool": {
+      "PresentRandom": "Случайное подмножество",
+      "PresentFull": "Весь пул",
+      "LabelProperty": "{prop} ({mode} {value})",
+      "LabelDamage": "{formula} ({dmgType})",
+      "LabelItemProperty": "свойство: {property}"
+    },
+
+    "PropertyMode": {
+      "Add": "Добавить",
+      "Set": "Установить"
+    },
+
+    "Activity": {
+      "attack": "Атака",
+      "heal": "Лечение",
+      "damage": "Урон",
+      "save": "Спасбросок",
+      "check": "Проверка",
+      "utility": "Утилита",
+      "cast": "Заклинание",
+      "enchant": "Зачарование",
+      "summon": "Призыв",
+      "transform": "Превращение",
+      "forward": "Переход"
+    },
+
+    "AttackType": {
+      "melee": "ближний",
+      "ranged": "дальний"
+    },
+
+    "ActivitySummary": {
+      "HealingFormula": "{formula} лечения",
+      "DCFormula": "СЛ {dc}"
+    },
+
+    "Tool": {
+      "alchemist": "Инструменты алхимика",
+      "brewer": "Инструменты пивовара",
+      "calligrapher": "Инструменты каллиграфа",
+      "carpenter": "Инструменты плотника",
+      "cartographer": "Инструменты картографа",
+      "cobbler": "Инструменты сапожника",
+      "cook": "Инструменты повара",
+      "glassblower": "Инструменты стеклодува",
+      "jeweler": "Инструменты ювелира",
+      "leatherworker": "Инструменты кожевника",
+      "mason": "Инструменты каменщика",
+      "painter": "Инструменты художника",
+      "potter": "Инструменты гончара",
+      "smith": "Инструменты кузнеца",
+      "tinker": "Инструменты жестянщика",
+      "weaver": "Инструменты ткача",
+      "woodcarver": "Инструменты резчика по дереву",
+      "disguise": "Набор для грима",
+      "forgery": "Набор для подделки",
+      "gaming": "Игровой набор",
+      "herbalism": "Набор травника",
+      "musical": "Музыкальный инструмент",
+      "navigator": "Инструменты навигатора",
+      "poisoner": "Набор отравителя",
+      "thieves": "Воровские инструменты"
+    },
+
+    "Role": {
+      "Player": "Игрок",
+      "Trusted": "Доверенный игрок",
+      "Assistant": "Ассистент GM",
+      "Gamemaster": "Мастер игры"
+    },
+
+    "Settings": {
+      "Title": "AdventureCraft — Настройки",
+      "PermissionsTitle": "Разрешения",
+      "PermissionsHint": "Выберите минимальную роль для каждой операции. Пользователи ниже порога не увидят соответствующий UI и не смогут выполнить действие.",
+      "Perm": {
+        "createRecipeName": "Создание рецептов",
+        "createRecipeHint": "Сохранение новых мировых рецептов с вкладки «Создать рецепт». Скрафт по уже известным персонажу рецептам («Мои рецепты») это разрешение не использует.",
+        "createBookName": "Управление книгами рецептов",
+        "createBookHint": "Создавать, переименовывать и удалять книги рецептов.",
+        "editAnyRecipeName": "Редактировать любые рецепты",
+        "editAnyRecipeHint": "Редактировать рецепты, не принадлежащие этому пользователю.",
+        "deleteAnyRecipeName": "Удалять любые рецепты",
+        "deleteAnyRecipeHint": "Удалять рецепты из мира (не только из инвентаря).",
+        "viewAllRecipesName": "Просмотр всех рецептов",
+        "viewAllRecipesHint": "Показывать вкладку «Все рецепты» в Hub.",
+        "importExportName": "Экспорт / Импорт",
+        "importExportHint": "Экспортировать и импортировать JSON рецептов.",
+        "combineItemsName": "Объединение предметов",
+        "combineItemsHint": "Использовать вкладку «Объединение предметов» (требует включения фичи)."
+      },
+
+      "DebugLoggingName": "Подробное логирование",
+      "DebugLoggingHint": "Логи комбайна/рецепта и каждого крафта: СЛ, порог крита, итог броска, d20 (если есть), сработал ли крит (итог ≥ СЛ + порог, не только «нат 20»).",
+      "CombineItemsName": "Включить вкладку «Combine Items»",
+      "CombineItemsHint": "Включить вкладку «Объединение предметов» (экспериментальная функция).",
+      "RecipeEditorTitle": "Редактор рецепта",
+      "ShowRecipeResultPropsName": "Показывать редактор свойств результата",
+      "ShowRecipeResultPropsHint": "На вкладке «Создать рецепт» показывать длинный список полей шаблона в сворачиваемом блоке. Если выключено, в интерфейсе нет пошагового выбора полей — в рецепт целиком уходит шаблон предмета.",
+      "MigrationTitle": "Миграция данных",
+      "MigrationHint": "Обнаружены рецепты в старом формате (world settings). Нажмите кнопку ниже, чтобы перенести их в предметы Foundry. Старые данные останутся в настройках как резервная копия.",
+      "MigrationDetected": "AdventureCraft: обнаружены рецепты в старом формате. Откройте настройки AdventureCraft для миграции.",
+      "MigrateButton": "Мигрировать рецепты в предметы",
+      "MigrationComplete": "Миграция завершена — {bookCount} книг, {recipeCount} рецептов перенесено в предметы.",
+      "SettingsSaved": "Настройки AdventureCraft сохранены.",
+      "DiagnosticsTitle": "Диагностика",
+      "CombineItemsTitle": "Объединение предметов",
+      "MenuName": "Настройки AdventureCraft",
+      "MenuLabel": "Настроить",
+      "MenuHint": "Разрешения, диагностика и опции редактора рецептов.",
+      "BridgeRequiredHint": "Включите модуль-мост adventurecraft-dnd5e, чтобы менять опции комбайна и редактора рецептов."
+    },
+
+    "Status": {
+      "InDevelopment": "В разработке",
+      "FeatureDisabled": "Функция объединения предметов временно отключена.",
+      "EnableInSettings": "Включить можно в <strong>Настройках модуля → AdventureCraft → Настроить</strong>.",
+      "Requires": "Требуется:",
+      "RequiresCheck": "Требует проверку {type} СЛ{dc}",
+      "NeedsQuantity": "нужно {quantity}, есть {have}",
+      "RecipeBookBadge": "Книга рецептов"
+    },
+
+    "Hub": {
+      "Title": "AdventureCraft Хаб",
+      "ManageBooks": "Книги",
+      "Export": "Экспортировать все рецепты",
+      "Import": "Импортировать рецепты из JSON",
+      "ExportTooltip": "Экспортировать все рецепты",
+      "ImportTooltip": "Импортировать рецепты из JSON"
+    },
+
+    "Sidebar": {
+      "OpenHub": "AdventureCraft",
+      "OpenTags": "AdventureCraft Теги"
+    },
+
+    "Window": {
+      "CraftingTitle": "Крафт"
+    },
+
+    "Error": {
+      "OnlyItems": "Сюда можно перетаскивать только предметы.",
+      "DropOneItem": "Перетащите хотя бы один предмет перед созданием.",
+      "EnterItemName": "Пожалуйста, введите название для нового предмета.",
+      "EnterRecipeName": "Пожалуйста, введите название рецепта.",
+      "AddIngredient": "Добавьте хотя бы один ингредиент.",
+      "NeedRecipeResultForCritPool": "Сначала добавьте предмет-результат для пула крита.",
+      "NoPermission": "У вас нет прав на это действие.",
+      "BridgeRequired": "Включите модуль-мост adventurecraft-dnd5e для создания и редактирования рецептов.",
+      "CritPoolEmpty": "В пуле крита должен быть хотя бы один вариант.",
+      "CritPoolInvalidOption": "Некорректный вариант пула крита #{index}.",
+      "CritPoolSizeTable": "Для броска размера нужна непустая JSON-таблица.",
+      "CritPoolSizeRow": "Некорректная строка таблицы размера #{row}.",
+      "CritPoolSizeRowRange": "Строка таблицы #{row}: min не может быть больше max.",
+      "CritPoolSizeJson": "Таблица размера должна быть корректным JSON-массивом.",
+      "MasteryNeedsCheck": "Включите проверку крафта, чтобы использовать мастерство рецепта."
+    }
+  }
+}
