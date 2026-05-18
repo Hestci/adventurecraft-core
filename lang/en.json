@@ -6,6 +6,7 @@
     "Tab": {
       "CombineItems": "Combine Items",
       "CreateRecipe": "Create Recipe",
+      "CreateStation": "Create Station",
       "MyRecipes": "My Recipes",
       "AllRecipes": "All Recipes"
     },
@@ -22,6 +23,7 @@
       "Import": "Import",
       "ManageBooks": "Manage Books",
       "CreateRecipe": "Create Recipe",
+      "CreateStation": "Create Station",
       "OpenBrowser": "Recipe Browser",
       "Browse": "Browse...",
       "Remove": "Remove",
@@ -240,7 +242,10 @@
       "IngredientsKept": "Ingredients kept.",
       "NoRecipesFor": "{actor} has no recipes yet.",
       "NoRecipesGeneric": "No available recipes.",
-      "NoCraftingPermissions": "You have no permission to use Combine Items or Create Recipe. Ask the GM to raise your role or change AdventureCraft permissions.",
+      "NoCraftingPermissions": "You have no permission to use Combine Items, Create Recipe, or Create Station. Ask the GM to raise your role or change AdventureCraft permissions.",
+      "StationCreated": "Station \"{name}\" created.",
+      "StationUpdated": "Station \"{name}\" updated.",
+      "StationDeleted": "Station \"{name}\" deleted.",
       "NoRecipesYet": "No recipes yet. Create the first one!",
       "OtherRecipes": "Other Recipes",
       "BookRenamed": "Book renamed: {name}",
@@ -460,7 +465,20 @@
       "OpenHub": "Craft at station",
       "SelectCharacter": "Choose character",
       "SelectCharacterTitle": "Crafting character",
-      "TierRequired": "Requires station tier {tier} (this station: {current})"
+      "TierRequired": "Requires station tier {tier} (this station: {current})",
+      "ListTitle": "World stations",
+      "CreateSection": "New station",
+      "EditSection": "Edit station",
+      "Name": "Station name",
+      "Tier": "Station tier",
+      "Portrait": "Portrait",
+      "Empty": "No stations yet. Create one below.",
+      "Create": "Create station",
+      "Save": "Save station",
+      "CancelEdit": "Cancel",
+      "OpenSheet": "Open sheet",
+      "DeleteTitle": "Delete station",
+      "DeleteContent": "Delete station \"{name}\"? This removes the actor from the world."
     },
 
     "Hub": {
@@ -492,6 +510,7 @@
       "AddIngredient": "Add at least one ingredient.",
       "NeedRecipeResultForCritPool": "Add a result item before suggesting a crit pool.",
       "NoPermission": "You don't have permission for this action.",
+      "StationNameRequired": "Enter a station name.",
       "BridgeRequired": "Enable the adventurecraft-dnd5e bridge module to create or edit recipes.",
       "CritPoolEmpty": "Crit pool must include at least one option.",
       "CritPoolInvalidOption": "Invalid crit pool option #{index}.",

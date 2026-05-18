@@ -48,6 +48,9 @@
         <button type="button" class="ac-btn-create-recipe ac-btn-primary">
           <i class="fas fa-plus"></i> {{localize "ADVENTURECRAFT.Button.CreateRecipe"}}
         </button>
+        <button type="button" class="ac-btn-create-station ac-btn-secondary">
+          <i class="fas fa-anvil"></i> {{localize "ADVENTURECRAFT.Button.CreateStation"}}
+        </button>
         {{/if}}
       </div>
 
@@ -268,6 +271,9 @@
         {{#if canCreateRecipe}}
         <button type="button" class="ac-btn-create-recipe ac-btn-primary">
           <i class="fas fa-plus"></i> {{localize "ADVENTURECRAFT.Button.CreateRecipe"}}
+        </button>
+        <button type="button" class="ac-btn-create-station ac-btn-secondary">
+          <i class="fas fa-anvil"></i> {{localize "ADVENTURECRAFT.Button.CreateStation"}}
         </button>
         {{/if}}
         {{#if permissions.canImportExport}}

@@ -6,6 +6,7 @@
     "Tab": {
       "CombineItems": "Объединение предметов",
       "CreateRecipe": "Создание рецепта",
+      "CreateStation": "Создание станка",
       "MyRecipes": "Мои рецепты",
       "AllRecipes": "Все рецепты"
     },
@@ -22,6 +23,7 @@
       "Import": "Импортировать",
       "ManageBooks": "Управление книгами рецептов",
       "CreateRecipe": "Создать рецепт",
+      "CreateStation": "Создать станок",
       "OpenBrowser": "Список рецептов",
       "Browse": "Обзор...",
       "Remove": "Убрать",
@@ -241,7 +243,10 @@
       "IngredientsKept": "Ингредиенты сохранены.",
       "NoRecipesFor": "У {actor} пока нет рецептов.",
       "NoRecipesGeneric": "Нет доступных рецептов.",
-      "NoCraftingPermissions": "Нет прав на вкладки «Объединение» и «Создание рецепта». Попросите GM повысить роль или изменить разрешения AdventureCraft.",
+      "NoCraftingPermissions": "Нет прав на «Объединение», «Создание рецепта» или «Создание станка». Попросите GM повысить роль или изменить разрешения AdventureCraft.",
+      "StationCreated": "Станок «{name}» создан.",
+      "StationUpdated": "Станок «{name}» обновлён.",
+      "StationDeleted": "Станок «{name}» удалён.",
       "NoRecipesYet": "Рецептов ещё нет. Создайте первый!",
       "OtherRecipes": "Прочие рецепты",
       "BookRenamed": "Книга переименована: {name}",
@@ -461,7 +466,20 @@
       "OpenHub": "Крафт у станка",
       "SelectCharacter": "Выберите персонажа",
       "SelectCharacterTitle": "Персонаж для крафта",
-      "TierRequired": "Нужен станок тира {tier} (этот станок: {current})"
+      "TierRequired": "Нужен станок тира {tier} (этот станок: {current})",
+      "ListTitle": "Станки в мире",
+      "CreateSection": "Новый станок",
+      "EditSection": "Редактирование станка",
+      "Name": "Название станка",
+      "Tier": "Тир станка",
+      "Portrait": "Портрет",
+      "Empty": "Станков пока нет. Создайте ниже.",
+      "Create": "Создать станок",
+      "Save": "Сохранить станок",
+      "CancelEdit": "Отмена",
+      "OpenSheet": "Открыть лист",
+      "DeleteTitle": "Удалить станок",
+      "DeleteContent": "Удалить станок «{name}»? Актёр будет удалён из мира."
     },
 
     "Hub": {
@@ -493,6 +511,7 @@
       "AddIngredient": "Добавьте хотя бы один ингредиент.",
       "NeedRecipeResultForCritPool": "Сначала добавьте предмет-результат для пула крита.",
       "NoPermission": "У вас нет прав на это действие.",
+      "StationNameRequired": "Введите название станка.",
       "BridgeRequired": "Включите модуль-мост adventurecraft-dnd5e для создания и редактирования рецептов.",
       "CritPoolEmpty": "В пуле крита должен быть хотя бы один вариант.",
       "CritPoolInvalidOption": "Некорректный вариант пула крита #{index}.",

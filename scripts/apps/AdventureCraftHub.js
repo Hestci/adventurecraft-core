@@ -217,6 +217,7 @@ export class AdventureCraftHub extends FormApplication {
     html.find(".ac-btn-shopping-post").on("click", this._onPostShoppingList.bind(this));
     if (userCan("createRecipe")) {
       html.find(".ac-btn-create-recipe").on("click", this._onCreateRecipe.bind(this));
+      html.find(".ac-btn-create-station").on("click", this._onCreateStation.bind(this));
     }
 
     // All recipes tab (permission-gated)
@@ -459,6 +460,16 @@ export class AdventureCraftHub extends FormApplication {
       return;
     }
     new CraftingWindow(this.actor).render(true);
+  }
+
+  _onCreateStation() {
+    if (!userCan("createRecipe")) return denyAndWarn();
+    const CraftingWindow = _craftingWindowClass();
+    if (!CraftingWindow?.openForStation) {
+      ui.notifications.warn(game.i18n.localize("ADVENTURECRAFT.Error.BridgeRequired"));
+      return;
+    }
+    CraftingWindow.openForStation(this.actor);
   }
 
   _onExport() {

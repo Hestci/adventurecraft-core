@@ -4,6 +4,7 @@ import { AdventureCraftHub } from "./apps/AdventureCraftHub.js";
 import { RecipeBrowser } from "./apps/RecipeBrowser.js";
 import { AdventureCraftSettings } from "./apps/AdventureCraftSettings.js";
 import { RecipeStore } from "./data/RecipeStore.js";
+import { StationStore } from "./data/StationStore.js";
 import { PERMISSION_KEYS, PERMISSION_DEFAULTS, ROLE_I18N, userCan, userCanForUser, getAllPermissions } from "./permissions.js";
 import { assertActorCanCraft, denyCraftActor } from "./craft-guards.js";
 import { registerDocumentGuards } from "./document-guards.js";
@@ -61,6 +62,7 @@ const moduleApi = {
   getAdapter,
   hasAdapter,
   RecipeStore,
+  StationStore,
   AdventureCraftHub,
   RecipeBrowser,
   AdventureCraftSettings,

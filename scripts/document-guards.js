@@ -1,6 +1,6 @@
 import { CORE_ID, LEGACY_MODULE_ID } from "./constants.js";
 import { userCanForUser } from "./permissions.js";
-import { isRecipeBookItem, isRecipeItem } from "./flag-utils.js";
+import { isRecipeBookItem, isRecipeItem, isStationActorFlag } from "./flag-utils.js";
 
 const BRIDGE_ID = "adventurecraft-dnd5e";
 
@@ -100,8 +100,39 @@ function _guardPreDeleteItem(item, _options, userId) {
   return true;
 }
 
+function _isStationInData(data) {
+  return _flag(data, CORE_ID, "isStation") === true
+    || _flag(data, LEGACY_MODULE_ID, "isStation") === true;
+}
+
+function _changesSetStation(changes) {
+  return _flag(changes, CORE_ID, "isStation") === true
+    || _flag(changes, LEGACY_MODULE_ID, "isStation") === true;
+}
+
+function _guardPreCreateActor(_doc, data, _options, userId) {
+  if (_isGm(userId)) return true;
+  if (!_isStationInData(data)) return true;
+  return userCanForUser(userId, "createRecipe") || _deny(userId, "createRecipe");
+}
+
+function _guardPreUpdateActor(actor, changes, _options, userId) {
+  if (_isGm(userId)) return true;
+  if (!isStationActorFlag(actor) && !_changesSetStation(changes)) return true;
+  return userCanForUser(userId, "createRecipe") || _deny(userId, "createRecipe");
+}
+
+function _guardPreDeleteActor(actor, _options, userId) {
+  if (_isGm(userId)) return true;
+  if (!isStationActorFlag(actor)) return true;
+  return userCanForUser(userId, "createRecipe") || _deny(userId, "createRecipe");
+}
+
 export function registerDocumentGuards() {
   Hooks.on("preCreateItem", _guardPreCreateItem);
   Hooks.on("preUpdateItem", _guardPreUpdateItem);
   Hooks.on("preDeleteItem", _guardPreDeleteItem);
+  Hooks.on("preCreateActor", _guardPreCreateActor);
+  Hooks.on("preUpdateActor", _guardPreUpdateActor);
+  Hooks.on("preDeleteActor", _guardPreDeleteActor);
 }
