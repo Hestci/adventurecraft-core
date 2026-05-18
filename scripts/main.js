@@ -19,6 +19,20 @@ import {
 import { escapeHtml } from "./html-utils.js";
 import { parseRecipeImportJson } from "./recipe-import-utils.js";
 import { normalizeMasteryTiers } from "./mastery-utils.js";
+import {
+  getShoppingList,
+  isRecipeWishlisted,
+  toggleRecipeWishlist,
+  removeRecipeFromShoppingList,
+  resolveWishlistRecipes,
+  aggregateShoppingShortages,
+  buildShoppingListChatContent,
+  postShoppingListToChat,
+  canUserEditActorWishlist,
+  canUserViewActorWishlist,
+  canUserPostShoppingList,
+  isShoppingListGmEnabled,
+} from "./shopping-list-utils.js";
 
 const moduleApi = {
   CORE_ID,
@@ -44,6 +58,18 @@ const moduleApi = {
   escapeHtml,
   parseRecipeImportJson,
   normalizeMasteryTiers,
+  getShoppingList,
+  isRecipeWishlisted,
+  toggleRecipeWishlist,
+  removeRecipeFromShoppingList,
+  resolveWishlistRecipes,
+  aggregateShoppingShortages,
+  buildShoppingListChatContent,
+  postShoppingListToChat,
+  canUserEditActorWishlist,
+  canUserViewActorWishlist,
+  canUserPostShoppingList,
+  isShoppingListGmEnabled,
 };
 
 Hooks.once("init", () => {
@@ -78,6 +104,15 @@ Hooks.once("init", () => {
 
   game.settings.register(CORE_ID, "migratedToItems", {
     name: "Migrated recipes to Items",
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: false,
+  });
+
+  game.settings.register(CORE_ID, "shoppingListGmEnabled", {
+    name: "ADVENTURECRAFT.Settings.ShoppingListGmEnabledName",
+    hint: "ADVENTURECRAFT.Settings.ShoppingListGmEnabledHint",
     scope: "world",
     config: false,
     type: Boolean,

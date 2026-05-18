@@ -6,6 +6,15 @@ import { userCan, getAllPermissions, denyAndWarn } from "../permissions.js";
 import { assertActorCanCraft, denyCraftActor } from "../craft-guards.js";
 import { escapeHtml } from "../html-utils.js";
 import { parseRecipeImportJson } from "../recipe-import-utils.js";
+import {
+  getShoppingList,
+  isRecipeWishlisted,
+  toggleRecipeWishlist,
+  removeRecipeFromShoppingList,
+  postShoppingListToChat,
+  canUserEditActorWishlist,
+  canUserPostShoppingList,
+} from "../shopping-list-utils.js";
 
 import { CORE_ID } from "../constants.js";
 
@@ -53,30 +62,41 @@ export class AdventureCraftHub extends FormApplication {
     const filteredAll = this._filterRecipes(allRecipes, this._searchAll, this._categoryAll, this._bookFilterAll);
 
     // Enrich recipe ingredients with availability status when actor is present
+    const canEditWishlist = this.actor ? canUserEditActorWishlist(this.actor) : false;
     const enrichRecipe = this.actor
       ? (r) => {
           const ingredients = enrichIngredients(this.actor, r.ingredients);
-          const base = { ...r, ingredients, canCraft: ingredients.every(i => i.status === "ok") };
-          const masteryOk = r.mastery?.enabled === true && r.check?.type && Number(r.mastery.masteryThreshold) > 0;
-          if (!masteryOk) return base;
-          const disp = getMasteryDisplay(this.actor, r);
-          const masteryDcHint = !disp.isMaster && disp.dcReduction > 0 && disp.effectiveDc != null
-            ? game.i18n.format("ADVENTURECRAFT.Mastery.DcReductionHint", {
-              reduction: disp.dcReduction,
-              effectiveDc: disp.effectiveDc,
-            })
-            : "";
-          return {
-            ...base,
-            masteryCount: disp.count,
-            masteryThreshold: disp.threshold,
-            masteryIsMaster: disp.isMaster,
-            masteryProgressLabel: game.i18n.format("ADVENTURECRAFT.Mastery.Progress", {
-              count: disp.count,
-              threshold: disp.threshold,
-            }),
-            masteryDcHint,
+          const isWishlisted = isRecipeWishlisted(this.actor, r.id);
+          let base = {
+            ...r,
+            ingredients,
+            canCraft: ingredients.every(i => i.status === "ok"),
+            isWishlisted,
+            canEditWishlist,
+            showWishlistIndicator: isWishlisted && !canEditWishlist,
           };
+          const masteryOk = r.mastery?.enabled === true && r.check?.type && Number(r.mastery.masteryThreshold) > 0;
+          if (masteryOk) {
+            const disp = getMasteryDisplay(this.actor, r);
+            const masteryDcHint = !disp.isMaster && disp.dcReduction > 0 && disp.effectiveDc != null
+              ? game.i18n.format("ADVENTURECRAFT.Mastery.DcReductionHint", {
+                reduction: disp.dcReduction,
+                effectiveDc: disp.effectiveDc,
+              })
+              : "";
+            base = {
+              ...base,
+              masteryCount: disp.count,
+              masteryThreshold: disp.threshold,
+              masteryIsMaster: disp.isMaster,
+              masteryProgressLabel: game.i18n.format("ADVENTURECRAFT.Mastery.Progress", {
+                count: disp.count,
+                threshold: disp.threshold,
+              }),
+              masteryDcHint,
+            };
+          }
+          return base;
         }
       : (r) => r;
 
@@ -102,10 +122,18 @@ export class AdventureCraftHub extends FormApplication {
     const allCategories = [...new Set(allRecipes.map(r => r.category).filter(Boolean))].sort();
     const myCategories  = [...new Set(myRecipes.map(r => r.category).filter(Boolean))].sort();
 
+    const wishlistCount = this.actor ? getShoppingList(this.actor).length : 0;
+    const canPostShoppingList = this.actor ? canUserPostShoppingList(this.actor) : false;
+
     return {
       permissions,
       canCreateRecipe: userCan("createRecipe"),
       actor: this.actor,
+      canPostShoppingList,
+      wishlistCount,
+      wishlistCountLabel: wishlistCount > 0
+        ? game.i18n.format("ADVENTURECRAFT.ShoppingList.WishlistCount", { count: wishlistCount })
+        : "",
       myBookGroups,
       myUnbooked,
       noMyRecipes:  filteredMy.length  === 0,
@@ -142,6 +170,8 @@ export class AdventureCraftHub extends FormApplication {
     html.find(".ac-book-filter-my").on("change",e => { this._bookFilterMy = e.currentTarget.value; this.render(); });
     html.find(".ac-btn-craft").on("click",  this._onCraft.bind(this));
     html.find(".ac-btn-forget").on("click", this._onForget.bind(this));
+    html.find(".ac-btn-wishlist").on("click", this._onToggleWishlist.bind(this));
+    html.find(".ac-btn-shopping-post").on("click", this._onPostShoppingList.bind(this));
     if (userCan("createRecipe")) {
       html.find(".ac-btn-create-recipe").on("click", this._onCreateRecipe.bind(this));
     }
@@ -349,9 +379,33 @@ export class AdventureCraftHub extends FormApplication {
       yes: () => true, no: () => false, defaultYes: false,
     });
     if (!confirmed) return;
+    await removeRecipeFromShoppingList(actor, recipeId);
     await actorItem.delete();
     ui.notifications.info(game.i18n.format("ADVENTURECRAFT.Message.RecipeForgotten", { name: escapeHtml(actorItem.name) }));
     this.render();
+  }
+
+  async _onToggleWishlist(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const actor = this.actor;
+    if (!actor || !canUserEditActorWishlist(actor)) {
+      denyAndWarn();
+      return;
+    }
+    const recipeId = event.currentTarget.dataset.recipeId;
+    if (!recipeId) return;
+    const added = await toggleRecipeWishlist(actor, recipeId);
+    const key = added ? "ADVENTURECRAFT.Message.WishlistAdded" : "ADVENTURECRAFT.Message.WishlistRemoved";
+    ui.notifications.info(game.i18n.localize(key));
+    this.render();
+  }
+
+  async _onPostShoppingList(event) {
+    event.preventDefault();
+    const actor = this.actor;
+    if (!actor) return;
+    await postShoppingListToChat(actor);
   }
 
   _onCreateRecipe() {

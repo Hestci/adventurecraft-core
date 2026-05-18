@@ -32,7 +32,10 @@
       "Confirm": "Подтвердить",
       "Save": "Сохранить",
       "AddCritPoolOption": "Добавить вариант пула",
-      "SuggestCritPool": "Предложить пул по типу предмета"
+      "SuggestCritPool": "Предложить пул по типу предмета",
+      "WishlistAdd": "В список покупок",
+      "WishlistRemove": "Убрать из списка",
+      "PostShoppingList": "Список покупок в чат"
     },
 
     "Aria": {
@@ -173,7 +176,19 @@
       "DcReductionHint": "СЛ −{reduction} (эффективная {effectiveDc})"
     },
 
+    "ShoppingList": {
+      "ChatTitle": "Список покупок",
+      "ChatTitleFor": "Список покупок — {actor}",
+      "ChatEmpty": "У {actor} нет рецептов в списке покупок.",
+      "ChatAllInStock": "{actor}: все ингредиенты для отмеченных рецептов есть в наличии.",
+      "ChatNeedMore": "нужно ещё {shortage}",
+      "WishlistCount": "В списке: {count} рецептов",
+      "OnListIndicator": "В списке покупок"
+    },
+
     "Message": {
+      "WishlistAdded": "Рецепт добавлен в список покупок.",
+      "WishlistRemoved": "Рецепт убран из списка покупок.",
       "ItemCreated": "Создан предмет \"{name}\" → {destination}.",
       "RecipeSaved": "Рецепт сохранён!",
       "RecipeUpdated": "Рецепт обновлён!",
@@ -359,8 +374,14 @@
         "importExportName": "Экспорт / Импорт",
         "importExportHint": "Экспортировать и импортировать JSON рецептов.",
         "combineItemsName": "Объединение предметов",
-        "combineItemsHint": "Использовать вкладку «Объединение предметов» (требует включения фичи)."
+        "combineItemsHint": "Использовать вкладку «Объединение предметов» (требует включения фичи).",
+        "viewShoppingListName": "Списки покупок игроков",
+        "viewShoppingListHint": "При включённой опции GM — просмотр wishlist другого персонажа в Hub и публикация сводки дефицита в чат."
       },
+
+      "ShoppingListTitle": "Список покупок (wishlist)",
+      "ShoppingListGmEnabledName": "GM видит списки покупок игроков",
+      "ShoppingListGmEnabledHint": "Пользователи с правом ниже видят отметки wishlist на рецептах чужого персонажа и могут отправить сводку недостающих ингредиентов в чат.",
 
       "DebugLoggingName": "Подробное логирование",
       "DebugLoggingHint": "Логи комбайна/рецепта и каждого крафта: СЛ, порог крита, итог броска, d20 (если есть), сработал ли крит (итог ≥ СЛ + порог, не только «нат 20»).",

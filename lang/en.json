@@ -32,7 +32,10 @@
       "Confirm": "Confirm",
       "Save": "Save",
       "AddCritPoolOption": "Add pool option",
-      "SuggestCritPool": "Suggest pool from item type"
+      "SuggestCritPool": "Suggest pool from item type",
+      "WishlistAdd": "Add to shopping list",
+      "WishlistRemove": "Remove from shopping list",
+      "PostShoppingList": "Post shopping list to chat"
     },
 
     "Aria": {
@@ -172,7 +175,19 @@
       "DcReductionHint": "DC −{reduction} (effective {effectiveDc})"
     },
 
+    "ShoppingList": {
+      "ChatTitle": "Shopping list",
+      "ChatTitleFor": "Shopping list — {actor}",
+      "ChatEmpty": "{actor} has no recipes on the shopping list.",
+      "ChatAllInStock": "{actor}: all ingredients for wishlist recipes are in stock.",
+      "ChatNeedMore": "need {shortage} more",
+      "WishlistCount": "On list: {count} recipes",
+      "OnListIndicator": "On shopping list"
+    },
+
     "Message": {
+      "WishlistAdded": "Recipe added to shopping list.",
+      "WishlistRemoved": "Recipe removed from shopping list.",
       "ItemCreated": "Created item \"{name}\" → {destination}.",
       "RecipeSaved": "Recipe saved!",
       "RecipeUpdated": "Recipe updated!",
@@ -358,8 +373,14 @@
         "importExportName": "Export / Import",
         "importExportHint": "Export and import recipe JSON.",
         "combineItemsName": "Combine items",
-        "combineItemsHint": "Use the «Combine Items» tab (requires the feature toggle)."
+        "combineItemsHint": "Use the «Combine Items» tab (requires the feature toggle).",
+        "viewShoppingListName": "View player shopping lists",
+        "viewShoppingListHint": "When GM shopping lists are enabled, view another character's wishlist in Hub and post their shortage summary to chat."
       },
+
+      "ShoppingListTitle": "Shopping list (wishlist)",
+      "ShoppingListGmEnabledName": "GM can view player shopping lists",
+      "ShoppingListGmEnabledHint": "Allows users with the permission below to see wishlist markers on another character's recipes and post their aggregated shortage to chat.",
 
       "DebugLoggingName": "Debug Logging",
       "DebugLoggingHint": "Logs combine/recipe debug plus each craft check: DC, crit threshold, roll total, d20 (if any), and whether crit success fired (total ≥ DC + threshold, not nat 20 alone).",

@@ -358,6 +358,61 @@
 }
 .ac-card-actions .ac-btn-craft { flex: 1; justify-content: center; }
 
+.ac-shopping-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  padding: 8px 10px;
+  background: var(--ac-bg-section);
+  border: 1px solid var(--ac-border);
+  border-radius: var(--ac-radius);
+}
+.ac-wishlist-count {
+  font-size: 0.85rem;
+  color: var(--ac-text-muted);
+}
+.ac-btn-wishlist {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--ac-border);
+  border-radius: var(--ac-radius-sm);
+  color: var(--ac-text-muted);
+  cursor: pointer;
+}
+.ac-btn-wishlist:hover {
+  color: var(--ac-yellow);
+  border-color: color-mix(in srgb, var(--ac-yellow) 50%, transparent);
+}
+.ac-btn-wishlist.ac-wishlist--active {
+  color: var(--ac-yellow);
+  border-color: var(--ac-yellow);
+  background: color-mix(in srgb, var(--ac-yellow) 15%, transparent);
+}
+.ac-wishlist-indicator {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ac-yellow);
+  opacity: 0.85;
+}
+.ac-shopping-chat-list {
+  margin: 0.5em 0 0 1.2em;
+  padding: 0;
+}
+.ac-shopping-chat-list li {
+  margin: 0.25em 0;
+}
+
 /* ============================================================
    ALL RECIPES LIST (GM вкладка)
    ============================================================ */

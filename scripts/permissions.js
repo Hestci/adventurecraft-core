@@ -8,6 +8,7 @@ export const PERMISSION_KEYS = [
   "viewAllRecipes",
   "importExport",
   "combineItems",
+  "viewShoppingList",
 ];
 
 export const PERMISSION_DEFAULTS = {
@@ -18,6 +19,7 @@ export const PERMISSION_DEFAULTS = {
   viewAllRecipes:  2,
   importExport:    4,
   combineItems:    2,
+  viewShoppingList: 3,
 };
 
 export const ROLE_I18N = {

@@ -42,6 +42,17 @@
         {{/if}}
       </div>
 
+      {{#if canPostShoppingList}}
+      <div class="ac-shopping-toolbar">
+        <button type="button" class="ac-btn-shopping-post ac-btn-secondary">
+          <i class="fas fa-cart-shopping"></i> {{localize "ADVENTURECRAFT.Button.PostShoppingList"}}
+        </button>
+        {{#if wishlistCountLabel}}
+          <span class="ac-wishlist-count">{{wishlistCountLabel}}</span>
+        {{/if}}
+      </div>
+      {{/if}}
+
       {{#if noMyRecipes}}
         <div class="ac-empty-state">
           <i class="fas fa-flask"></i>
@@ -102,6 +113,16 @@
                     </div>
                   </div>
                   <div class="ac-card-actions">
+                    {{#if this.canEditWishlist}}
+                    <button type="button" class="ac-btn-wishlist{{#if this.isWishlisted}} ac-wishlist--active{{/if}}" data-recipe-id="{{this.id}}"
+                            title="{{#if this.isWishlisted}}{{localize "ADVENTURECRAFT.Button.WishlistRemove"}}{{else}}{{localize "ADVENTURECRAFT.Button.WishlistAdd"}}{{/if}}">
+                      <i class="fas fa-star"></i>
+                    </button>
+                    {{else}}
+                      {{#if this.showWishlistIndicator}}
+                      <span class="ac-wishlist-indicator" title="{{localize "ADVENTURECRAFT.ShoppingList.OnListIndicator"}}"><i class="fas fa-star"></i></span>
+                      {{/if}}
+                    {{/if}}
                     <button type="button" class="ac-btn-craft ac-btn-primary" data-recipe-id="{{this.id}}"
                             {{#unless this.canCraft}}disabled{{/unless}}>
                       <i class="fas fa-hammer"></i> {{localize "ADVENTURECRAFT.Button.Craft"}}
@@ -168,6 +189,16 @@
                   </div>
                 </div>
                 <div class="ac-card-actions">
+                  {{#if this.canEditWishlist}}
+                  <button type="button" class="ac-btn-wishlist{{#if this.isWishlisted}} ac-wishlist--active{{/if}}" data-recipe-id="{{this.id}}"
+                          title="{{#if this.isWishlisted}}{{localize "ADVENTURECRAFT.Button.WishlistRemove"}}{{else}}{{localize "ADVENTURECRAFT.Button.WishlistAdd"}}{{/if}}">
+                    <i class="fas fa-star"></i>
+                  </button>
+                  {{else}}
+                    {{#if this.showWishlistIndicator}}
+                    <span class="ac-wishlist-indicator" title="{{localize "ADVENTURECRAFT.ShoppingList.OnListIndicator"}}"><i class="fas fa-star"></i></span>
+                    {{/if}}
+                  {{/if}}
                   <button type="button" class="ac-btn-craft ac-btn-primary" data-recipe-id="{{this.id}}"
                           {{#unless this.canCraft}}disabled{{/unless}}>
                     <i class="fas fa-hammer"></i> {{localize "ADVENTURECRAFT.Button.Craft"}}

@@ -44,6 +44,7 @@ export class AdventureCraftSettings extends FormApplication {
     const enableCombine = _bridgeSetting("enableCombine");
     const showRecipeResultProps = _bridgeSetting("showRecipeResultProps");
     const bridgeActive = game.modules.get(BRIDGE_ID)?.active === true;
+    const shoppingListGmEnabled = game.settings.get(MODULE_ID, "shoppingListGmEnabled");
 
     const permissions = PERMISSION_KEYS.map(key => {
       const current = getPermissionMinimum(key);
@@ -59,7 +60,15 @@ export class AdventureCraftSettings extends FormApplication {
       };
     });
 
-    return { debugLogging, enableCombine, showRecipeResultProps, bridgeActive, needsMigration, permissions };
+    return {
+      debugLogging,
+      enableCombine,
+      showRecipeResultProps,
+      bridgeActive,
+      needsMigration,
+      shoppingListGmEnabled,
+      permissions,
+    };
   }
 
   activateListeners(html) {
@@ -114,6 +123,7 @@ export class AdventureCraftSettings extends FormApplication {
 
   async _updateObject(_event, formData) {
     await game.settings.set(MODULE_ID, "debugLogging", !!formData.debugLogging);
+    await game.settings.set(MODULE_ID, "shoppingListGmEnabled", !!formData.shoppingListGmEnabled);
     if (game.modules.get(BRIDGE_ID)?.active) {
       await _setBridgeSetting("enableCombine", !!formData.enableCombine);
       await _setBridgeSetting("showRecipeResultProps", !!formData.showRecipeResultProps);
