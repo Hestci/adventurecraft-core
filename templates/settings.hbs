@@ -30,6 +30,17 @@
 
   <section class="ac-settings-section">
     <h3 class="ac-settings-section-title">
+      <i class="fas fa-scroll"></i> {{localize "ADVENTURECRAFT.Settings.OriginTitle"}}
+    </h3>
+    <label class="ac-settings-type-row">
+      <input type="checkbox" name="recordCraftingOrigin" {{#if recordCraftingOrigin}}checked{{/if}}/>
+      <span class="ac-settings-type-label">{{localize "ADVENTURECRAFT.Settings.RecordCraftingOriginName"}}</span>
+    </label>
+    <p class="ac-settings-hint">{{localize "ADVENTURECRAFT.Settings.RecordCraftingOriginHint"}}</p>
+  </section>
+
+  <section class="ac-settings-section">
+    <h3 class="ac-settings-section-title">
       <i class="fas fa-bug"></i> {{localize "ADVENTURECRAFT.Settings.DiagnosticsTitle"}}
     </h3>
     <label class="ac-settings-type-row">

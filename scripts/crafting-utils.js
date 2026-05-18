@@ -16,6 +16,16 @@ import {
 } from "./mastery-utils.js";
 import { escapeHtml } from "./html-utils.js";
 import { assertActorCanCraft, denyCraftActor } from "./craft-guards.js";
+import {
+  buildCraftOrigin,
+  buildMasteryCheckMeta,
+  buildNoCheckMeta,
+  buildRolledCheckMeta,
+  attachOriginToResultData,
+  appendOriginToDescription,
+  applyOriginToCraftedItem,
+  isRecordCraftingOriginEnabled,
+} from "./crafting-origin-utils.js";
 
 export { pickCritPoolOption, validateCritPoolConfig, normalizePoolEntry, formatPoolOptionLabel };
 
@@ -83,20 +93,35 @@ export async function consumeIngredients(actor, ingredients) {
 
 export async function performCheck(actor, recipe) {
   if (!recipe.check?.type) {
-    return { success: true, consume: true, critSuccess: false, critFail: false };
+    return {
+      success: true,
+      consume: true,
+      critSuccess: false,
+      critFail: false,
+      checkMeta: buildNoCheckMeta(),
+    };
   }
 
   const masteryGuaranteed = isMasteryGuaranteed(actor, recipe);
   const rollForCritOnly = masteryGuaranteed && masteryAllowsCritRoll(recipe);
 
   if (masteryGuaranteed && !rollForCritOnly) {
-    return { success: true, consume: true, critSuccess: false, critFail: false, masteryGuaranteed: true };
+    return {
+      success: true,
+      consume: true,
+      critSuccess: false,
+      critFail: false,
+      masteryGuaranteed: true,
+      checkMeta: buildMasteryCheckMeta(recipe, actor),
+    };
   }
 
   const { consumeOnFail } = recipe.check;
   try {
     const rolled = await getAdapter().rollCraftCheck(actor, recipe);
-    if (rolled.fail) return rolled.fail;
+    if (rolled.fail) {
+      return { ...rolled.fail, checkMeta: buildNoCheckMeta() };
+    }
 
     const { roll, dc: baseDc, threshold } = rolled;
     const dcReduction = getMasteryDcReduction(actor, recipe);
@@ -109,16 +134,35 @@ export async function performCheck(actor, recipe) {
       `AdventureCraft | performCheck: rolled=${roll.total} vs DC=${effectiveDc} (base ${baseDc}, mastery -${dcReduction}) → success=${success} crit=${critSuccess}`,
     );
 
+    const checkMeta = buildRolledCheckMeta({
+      roll,
+      baseDc,
+      threshold,
+      actor,
+      recipe,
+      success,
+      critSuccess,
+      critFail,
+      masteryGuaranteed: rollForCritOnly,
+    });
+
     return {
       success,
       consume: success || consumeOnFail,
       critSuccess,
       critFail,
+      checkMeta,
       ...(rollForCritOnly ? { masteryGuaranteed: true } : {}),
     };
   } catch (err) {
     console.warn("AdventureCraft | performCheck failed:", err);
-    return { success: false, consume: false, critSuccess: false, critFail: false };
+    return {
+      success: false,
+      consume: false,
+      critSuccess: false,
+      critFail: false,
+      checkMeta: buildNoCheckMeta(),
+    };
   }
 }
 
@@ -168,7 +212,7 @@ export async function runCraftExecution(actor, recipe) {
     return false;
   }
   const adapter = getAdapter();
-  const { success, consume, critSuccess, critFail } = await performCheck(actor, recipe);
+  const { success, consume, critSuccess, critFail, checkMeta } = await performCheck(actor, recipe);
 
   if (consume || critFail) await consumeIngredients(actor, recipe.ingredients);
 
@@ -216,6 +260,13 @@ export async function runCraftExecution(actor, recipe) {
 
   const stackTarget = adapter.findStackTarget(actor, resultData, critChangesProperties);
 
+  let originToWrite = null;
+  if (!stackTarget && isRecordCraftingOriginEnabled()) {
+    originToWrite = buildCraftOrigin({ actor, recipe, checkMeta });
+    attachOriginToResultData(resultData, originToWrite);
+    appendOriginToDescription(resultData, originToWrite);
+  }
+
   const qualityEnabled = recipe.critQualityNames === true;
   let qualityWord = "";
   if (critSuccess && qualityEnabled) {
@@ -235,6 +286,10 @@ export async function runCraftExecution(actor, recipe) {
     qty,
     stackTarget,
   );
+
+  if (created && originToWrite) {
+    await applyOriginToCraftedItem(resultItem, originToWrite);
+  }
 
   const qtyLabel = qty > 1 ? ` ×${qty}` : "";
   const notifyName = created ? (resultData.name ?? recipe.result.name) : resultItem.name;

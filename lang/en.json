@@ -175,6 +175,39 @@
       "DcReductionHint": "DC −{reduction} (effective {effectiveDc})"
     },
 
+    "Origin": {
+      "ShowButton": "Show crafting origin",
+      "SheetTitle": "Crafting origin",
+      "SheetCrafter": "Crafter",
+      "SheetRecipe": "Recipe",
+      "SheetDate": "Crafted",
+      "SheetCheck": "Craft check",
+      "SheetStation": "Station",
+      "SheetStationRow": "<dt>{label}</dt><dd>{name}</dd>",
+      "SheetPanel": "<div class=\"ac-origin-panel__inner\"><h4 class=\"ac-origin-panel__title\">{title}</h4><dl class=\"ac-origin-panel__fields\"><dt>{crafterLabel}</dt><dd>{crafter}</dd><dt>{recipeLabel}</dt><dd>{recipe}</dd><dt>{dateLabel}</dt><dd>{date}</dd><dt>{checkLabel}</dt><dd>{check}</dd>{stationRow}</dl></div>",
+      "DescriptionBlock": "<!-- adventurecraft-craft-origin --><div class=\"ac-craft-origin\"><p><em>{title}</em></p><p><strong>{crafterLabel}:</strong> {crafter} · <strong>{recipeLabel}:</strong> {recipe}</p><p><strong>{dateLabel}:</strong> {date}</p>{checkRow}{stationRow}</div>",
+      "DescriptionCheckRow": "<p><strong>{label}:</strong> {check}</p>",
+      "DescriptionStationRow": "<p><strong>{label}:</strong> {name}</p>",
+      "PersistFailed": "Could not save crafting origin on the new item. Check permissions or ask the GM.",
+      "NoOrigin": "This item has no crafting origin recorded.",
+      "ChatTemplate": "<div class=\"adventurecraft-origin-chat\"><h3>{item}</h3><p><strong>{crafter}</strong> · {recipe}</p><p><em>{date}</em></p>{checkBlock}{stationBlock}</div>",
+      "CheckNone": "No craft check (automatic success).",
+      "CheckMastery": "Mastered recipe — automatic success.",
+      "CheckMasteryWithDc": "Mastered recipe — automatic success (DC {dc}).",
+      "CheckRollVsDc": "Roll {total} vs DC {dc}",
+      "CheckNatural": "d20: {natural}",
+      "CheckMasteryReduction": "Base DC {baseDc}, mastery −{reduction}",
+      "StationLine": "Station: {name}",
+      "Outcome": {
+        "crit_success": "Critical success",
+        "success": "Success",
+        "fail": "Failure",
+        "crit_fail": "Critical failure",
+        "mastery": "Mastery",
+        "none": "No check"
+      }
+    },
+
     "ShoppingList": {
       "ChatTitle": "Shopping list",
       "ChatTitleFor": "Shopping list — {actor}",
@@ -382,6 +415,10 @@
       "ShoppingListGmEnabledName": "GM can view player shopping lists",
       "ShoppingListGmEnabledHint": "Allows users with the permission below to see wishlist markers on another character's recipes and post their aggregated shortage to chat.",
 
+      "OriginTitle": "Crafting origin (provenance)",
+      "RecordCraftingOriginName": "Record crafting origin on new items",
+      "RecordCraftingOriginHint": "When enabled, newly crafted items store provenance in flags and append a crafting-origin block to the item description. Players can post origin to chat from the item sheet header.",
+
       "DebugLoggingName": "Debug Logging",
       "DebugLoggingHint": "Logs combine/recipe debug plus each craft check: DC, crit threshold, roll total, d20 (if any), and whether crit success fired (total ≥ DC + threshold, not nat 20 alone).",
       "CombineItemsName": "Enable Combine Items",
@@ -424,7 +461,8 @@
 
     "Sidebar": {
       "OpenHub": "AdventureCraft",
-      "OpenTags": "AdventureCraft Tags"
+      "OpenTags": "AdventureCraft Tags",
+      "ShowOrigin": "Show crafting origin"
     },
 
     "Window": {

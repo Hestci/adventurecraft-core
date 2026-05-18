@@ -176,6 +176,39 @@
       "DcReductionHint": "СЛ −{reduction} (эффективная {effectiveDc})"
     },
 
+    "Origin": {
+      "ShowButton": "Показать происхождение",
+      "SheetTitle": "Происхождение крафта",
+      "SheetCrafter": "Кузнец",
+      "SheetRecipe": "Рецепт",
+      "SheetDate": "Создано",
+      "SheetCheck": "Проверка крафта",
+      "SheetStation": "Станок",
+      "SheetStationRow": "<dt>{label}</dt><dd>{name}</dd>",
+      "SheetPanel": "<div class=\"ac-origin-panel__inner\"><h4 class=\"ac-origin-panel__title\">{title}</h4><dl class=\"ac-origin-panel__fields\"><dt>{crafterLabel}</dt><dd>{crafter}</dd><dt>{recipeLabel}</dt><dd>{recipe}</dd><dt>{dateLabel}</dt><dd>{date}</dd><dt>{checkLabel}</dt><dd>{check}</dd>{stationRow}</dl></div>",
+      "DescriptionBlock": "<!-- adventurecraft-craft-origin --><div class=\"ac-craft-origin\"><p><em>{title}</em></p><p><strong>{crafterLabel}:</strong> {crafter} · <strong>{recipeLabel}:</strong> {recipe}</p><p><strong>{dateLabel}:</strong> {date}</p>{checkRow}{stationRow}</div>",
+      "DescriptionCheckRow": "<p><strong>{label}:</strong> {check}</p>",
+      "DescriptionStationRow": "<p><strong>{label}:</strong> {name}</p>",
+      "PersistFailed": "Не удалось сохранить происхождение на новом предмете. Проверьте права или обратитесь к Мастеру.",
+      "NoOrigin": "У этого предмета нет записи о происхождении крафта.",
+      "ChatTemplate": "<div class=\"adventurecraft-origin-chat\"><h3>{item}</h3><p><strong>{crafter}</strong> · {recipe}</p><p><em>{date}</em></p>{checkBlock}{stationBlock}</div>",
+      "CheckNone": "Без проверки (автоматический успех).",
+      "CheckMastery": "Освоенный рецепт — автоматический успех.",
+      "CheckMasteryWithDc": "Освоенный рецепт — автоматический успех (СЛ {dc}).",
+      "CheckRollVsDc": "Бросок {total} против СЛ {dc}",
+      "CheckNatural": "d20: {natural}",
+      "CheckMasteryReduction": "Базовая СЛ {baseDc}, мастерство −{reduction}",
+      "StationLine": "Станок: {name}",
+      "Outcome": {
+        "crit_success": "Критический успех",
+        "success": "Успех",
+        "fail": "Провал",
+        "crit_fail": "Критический провал",
+        "mastery": "Мастерство",
+        "none": "Без проверки"
+      }
+    },
+
     "ShoppingList": {
       "ChatTitle": "Список покупок",
       "ChatTitleFor": "Список покупок — {actor}",
@@ -383,6 +416,10 @@
       "ShoppingListGmEnabledName": "GM видит списки покупок игроков",
       "ShoppingListGmEnabledHint": "Пользователи с правом ниже видят отметки wishlist на рецептах чужого персонажа и могут отправить сводку недостающих ингредиентов в чат.",
 
+      "OriginTitle": "След крафта (provenance)",
+      "RecordCraftingOriginName": "Записывать происхождение на новых предметах",
+      "RecordCraftingOriginHint": "При успешном крафте на предмете сохраняются кузнец, время и итог проверки; в описание добавляется блок происхождения. Игроки могут опубликовать происхождение в чат с листа предмета.",
+
       "DebugLoggingName": "Подробное логирование",
       "DebugLoggingHint": "Логи комбайна/рецепта и каждого крафта: СЛ, порог крита, итог броска, d20 (если есть), сработал ли крит (итог ≥ СЛ + порог, не только «нат 20»).",
       "CombineItemsName": "Включить вкладку «Combine Items»",
@@ -425,7 +462,8 @@
 
     "Sidebar": {
       "OpenHub": "AdventureCraft",
-      "OpenTags": "AdventureCraft Теги"
+      "OpenTags": "AdventureCraft Теги",
+      "ShowOrigin": "Показать происхождение"
     },
 
     "Window": {

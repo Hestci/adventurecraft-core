@@ -45,6 +45,7 @@ export class AdventureCraftSettings extends FormApplication {
     const showRecipeResultProps = _bridgeSetting("showRecipeResultProps");
     const bridgeActive = game.modules.get(BRIDGE_ID)?.active === true;
     const shoppingListGmEnabled = game.settings.get(MODULE_ID, "shoppingListGmEnabled");
+    const recordCraftingOrigin = game.settings.get(MODULE_ID, "recordCraftingOrigin") !== false;
 
     const permissions = PERMISSION_KEYS.map(key => {
       const current = getPermissionMinimum(key);
@@ -67,6 +68,7 @@ export class AdventureCraftSettings extends FormApplication {
       bridgeActive,
       needsMigration,
       shoppingListGmEnabled,
+      recordCraftingOrigin,
       permissions,
     };
   }
@@ -124,6 +126,7 @@ export class AdventureCraftSettings extends FormApplication {
   async _updateObject(_event, formData) {
     await game.settings.set(MODULE_ID, "debugLogging", !!formData.debugLogging);
     await game.settings.set(MODULE_ID, "shoppingListGmEnabled", !!formData.shoppingListGmEnabled);
+    await game.settings.set(MODULE_ID, "recordCraftingOrigin", !!formData.recordCraftingOrigin);
     if (game.modules.get(BRIDGE_ID)?.active) {
       await _setBridgeSetting("enableCombine", !!formData.enableCombine);
       await _setBridgeSetting("showRecipeResultProps", !!formData.showRecipeResultProps);

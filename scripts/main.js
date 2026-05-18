@@ -33,6 +33,16 @@ import {
   canUserPostShoppingList,
   isShoppingListGmEnabled,
 } from "./shopping-list-utils.js";
+import {
+  buildCraftOrigin,
+  buildOriginDescriptionHtml,
+  appendOriginToDescription,
+  buildOriginSheetPanelHtml,
+  getCraftOrigin,
+  hasCraftOrigin,
+  postOriginToChat,
+  isRecordCraftingOriginEnabled,
+} from "./crafting-origin-utils.js";
 
 const moduleApi = {
   CORE_ID,
@@ -70,6 +80,14 @@ const moduleApi = {
   canUserViewActorWishlist,
   canUserPostShoppingList,
   isShoppingListGmEnabled,
+  buildCraftOrigin,
+  buildOriginDescriptionHtml,
+  appendOriginToDescription,
+  buildOriginSheetPanelHtml,
+  getCraftOrigin,
+  hasCraftOrigin,
+  postOriginToChat,
+  isRecordCraftingOriginEnabled,
 };
 
 Hooks.once("init", () => {
@@ -117,6 +135,15 @@ Hooks.once("init", () => {
     config: false,
     type: Boolean,
     default: false,
+  });
+
+  game.settings.register(CORE_ID, "recordCraftingOrigin", {
+    name: "ADVENTURECRAFT.Settings.RecordCraftingOriginName",
+    hint: "ADVENTURECRAFT.Settings.RecordCraftingOriginHint",
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: true,
   });
 
   for (const key of PERMISSION_KEYS) {
