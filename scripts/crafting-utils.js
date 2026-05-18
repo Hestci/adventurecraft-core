@@ -26,8 +26,29 @@ import {
   applyOriginToCraftedItem,
   isRecordCraftingOriginEnabled,
 } from "./crafting-origin-utils.js";
+import {
+  canCraftRecipeAtStation,
+  buildStationOriginContext,
+  getRecipeStations,
+} from "./station-utils.js";
 
 export { pickCritPoolOption, validateCritPoolConfig, normalizePoolEntry, formatPoolOptionLabel };
+
+function _assertStationCraftAllowed(recipe, stationActor) {
+  const { required, minTier } = getRecipeStations(recipe);
+  if (!required) return true;
+  if (!stationActor) {
+    ui.notifications.warn(game.i18n.localize("ADVENTURECRAFT.Message.StationRequired"));
+    return false;
+  }
+  if (!canCraftRecipeAtStation(recipe, stationActor)) {
+    ui.notifications.warn(game.i18n.format("ADVENTURECRAFT.Message.StationTierTooLow", {
+      tier: minTier,
+    }));
+    return false;
+  }
+  return true;
+}
 
 export function pickCritQualityWord() {
   const raw = game.i18n.localize("ADVENTURECRAFT.Quality.WordPool");
@@ -206,12 +227,16 @@ export function critSuccessChangesProperties(recipe, poolPick) {
   return et === "property" || et === "damage" || et === "itemProperty";
 }
 
-export async function runCraftExecution(actor, recipe) {
+export async function runCraftExecution(actor, recipe, options = {}) {
   if (!assertActorCanCraft(actor)) {
     denyCraftActor();
     return false;
   }
+  const stationActor = options.stationActor ?? null;
+  if (!_assertStationCraftAllowed(recipe, stationActor)) return false;
+
   const adapter = getAdapter();
+  const stationContext = stationActor ? buildStationOriginContext(stationActor) : null;
   const { success, consume, critSuccess, critFail, checkMeta } = await performCheck(actor, recipe);
 
   if (consume || critFail) await consumeIngredients(actor, recipe.ingredients);
@@ -262,7 +287,7 @@ export async function runCraftExecution(actor, recipe) {
 
   let originToWrite = null;
   if (!stackTarget && isRecordCraftingOriginEnabled()) {
-    originToWrite = buildCraftOrigin({ actor, recipe, checkMeta });
+    originToWrite = buildCraftOrigin({ actor, recipe, checkMeta, stationContext });
     attachOriginToResultData(resultData, originToWrite);
     appendOriginToDescription(resultData, originToWrite);
   }
@@ -366,11 +391,13 @@ export function formatCraftConfirmCheckParagraph(actor, recipe) {
   return `<p><em>${game.i18n.format("ADVENTURECRAFT.Dialog.ConfirmCraftWithCheck", { type: checkTypeLabel, dc: baseDc })}</em></p>`;
 }
 
-export async function performCraft(actor, recipe) {
+export async function performCraft(actor, recipe, options = {}) {
   if (!assertActorCanCraft(actor)) {
     denyCraftActor();
     return false;
   }
+  if (!_assertStationCraftAllowed(recipe, options.stationActor ?? null)) return false;
+
   const missing = checkIngredients(actor, recipe.ingredients);
   if (missing.length) {
     const list = missing.map(m => `${m.name} ×${m.needed} (${m.have})`).join(", ");
@@ -388,5 +415,5 @@ export async function performCraft(actor, recipe) {
   });
   if (!confirmed) return false;
 
-  return runCraftExecution(actor, recipe);
+  return runCraftExecution(actor, recipe, options);
 }

@@ -7,6 +7,7 @@ import {
   isRecipeItem,
   isRecipeBookItem,
 } from "../flag-utils.js";
+import { normalizeRecipeStations } from "../station-utils.js";
 
 export class RecipeStore {
 
@@ -31,6 +32,12 @@ export class RecipeStore {
     return RecipeStore._normalizeMasteryFromData(m);
   }
 
+  static _normalizeStationsForSave(stations) {
+    const n = normalizeRecipeStations(stations);
+    if (!n.required) return null;
+    return { required: true, minTier: n.minTier };
+  }
+
   static _itemToRecipe(item) {
     const rd = getRecipeData(item);
     return {
@@ -43,6 +50,7 @@ export class RecipeStore {
       bookId:      RecipeStore._getContainerId(item),
       critQualityNames: rd.critQualityNames === true,
       mastery:     RecipeStore._normalizeMasteryFromData(rd.mastery),
+      stations:    normalizeRecipeStations(rd.stations),
       worldSourceId: getModuleFlag(item, "worldSourceId") ?? null,
     };
   }
@@ -106,6 +114,7 @@ export class RecipeStore {
       result:      recipe.result      ?? null,
       critQualityNames: recipe.critQualityNames === true,
       mastery:     RecipeStore._normalizeMasteryForSave(recipe.mastery),
+      stations:    RecipeStore._normalizeStationsForSave(recipe.stations),
     };
 
     if (recipe.id) {

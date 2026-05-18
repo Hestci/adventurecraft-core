@@ -139,6 +139,28 @@
   font-family: var(--dnd5e-font-roboto, var(--font-primary, sans-serif));
 }
 
+.ac-hub-station-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 12px 0;
+  padding: 8px 12px;
+  border-radius: var(--ac-radius);
+  background: rgba(200, 160, 48, 0.18);
+  border: 1px solid rgba(200, 160, 48, 0.45);
+  color: var(--ac-yellow);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.ac-hub-station-banner i { opacity: 0.9; }
+
+.ac-station-tier-hint {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--ac-yellow);
+  opacity: 0.95;
+}
+
 /* --- Tabs --- */
 .ac-hub-tabs {
   display: flex;

@@ -1,13 +1,22 @@
 <div class="ac-hub">
 
+  {{#if stationMode}}
+  <div class="ac-hub-station-banner">
+    <i class="fas fa-anvil"></i>
+    <span>{{localize "ADVENTURECRAFT.Hub.StationBanner" name=stationName tier=stationTier}}</span>
+  </div>
+  {{/if}}
+
   <nav class="ac-hub-tabs tabs" data-group="primary">
     <a class="item" data-tab="my-recipes" data-group="primary">
       <i class="fas fa-book-open"></i> {{localize "ADVENTURECRAFT.Tab.MyRecipes"}}
     </a>
     {{#if permissions.canViewAllRecipes}}
+    {{#unless stationMode}}
     <a class="item" data-tab="all-recipes" data-group="primary">
       <i class="fas fa-scroll"></i> {{localize "ADVENTURECRAFT.Tab.AllRecipes"}}
     </a>
+    {{/unless}}
     {{/if}}
   </nav>
 
@@ -112,6 +121,9 @@
                       {{/each}}
                     </div>
                   </div>
+                  {{#if this.stationTierHint}}
+                  <p class="ac-station-tier-hint"><i class="fas fa-anvil"></i> {{this.stationTierHint}}</p>
+                  {{/if}}
                   <div class="ac-card-actions">
                     {{#if this.canEditWishlist}}
                     <button type="button" class="ac-btn-wishlist{{#if this.isWishlisted}} ac-wishlist--active{{/if}}" data-recipe-id="{{this.id}}"
@@ -188,6 +200,9 @@
                     {{/each}}
                   </div>
                 </div>
+                {{#if this.stationTierHint}}
+                <p class="ac-station-tier-hint"><i class="fas fa-anvil"></i> {{this.stationTierHint}}</p>
+                {{/if}}
                 <div class="ac-card-actions">
                   {{#if this.canEditWishlist}}
                   <button type="button" class="ac-btn-wishlist{{#if this.isWishlisted}} ac-wishlist--active{{/if}}" data-recipe-id="{{this.id}}"
@@ -223,6 +238,7 @@
 
     {{!-- =================== TAB: ALL RECIPES =================== --}}
     {{#if permissions.canViewAllRecipes}}
+    {{#unless stationMode}}
     <div class="tab" data-tab="all-recipes" data-group="primary">
 
       <div class="ac-hub-toolbar">
@@ -316,6 +332,7 @@
       {{/if}}
 
     </div>
+    {{/unless}}
     {{/if}}
 
   </div>

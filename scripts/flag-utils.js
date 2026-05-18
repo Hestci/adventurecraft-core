@@ -35,3 +35,20 @@ export function isRecipeBookItem(item) {
 export function getRecipeData(item) {
   return getModuleFlag(item, "recipeData") ?? {};
 }
+
+/**
+ * @param {Actor} actor
+ * @returns {boolean}
+ */
+export function isStationActorFlag(actor) {
+  return getModuleFlag(actor, "isStation") === true;
+}
+
+/**
+ * @param {Actor} actor
+ * @returns {object|null}
+ */
+export function getStationFlagData(actor) {
+  const raw = getModuleFlag(actor, "station");
+  return raw && typeof raw === "object" ? raw : null;
+}

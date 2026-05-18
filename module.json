@@ -2,7 +2,7 @@
   "id": "adventurecraft-core",
   "title": "AdventureCraft Core",
   "description": "System-agnostic crafting engine for Foundry VTT. Requires a system bridge (e.g. adventurecraft-dnd5e).",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "authors": [{ "name": "Hest", "flags": {} }],
   "compatibility": { "minimum": "14", "verified": "14" },
   "esmodules": ["scripts/main.js"],

@@ -15,6 +15,12 @@ import {
   canUserEditActorWishlist,
   canUserPostShoppingList,
 } from "../shopping-list-utils.js";
+import {
+  isRecipeVisibleInHub,
+  getRecipeStationCraftState,
+  getStationTier,
+  isStationActor,
+} from "../station-utils.js";
 
 import { CORE_ID } from "../constants.js";
 
@@ -27,12 +33,31 @@ function _craftingWindowClass() {
 export class AdventureCraftHub extends FormApplication {
   constructor(actor, options = {}) {
     super(actor, options);
+    this._stationActor = options.stationActor ?? null;
     this._searchMy      = "";
     this._categoryMy    = "";
     this._bookFilterMy  = "";
     this._searchAll     = "";
     this._categoryAll   = "";
     this._bookFilterAll = "";
+  }
+
+  get stationActor() {
+    return this._stationActor;
+  }
+
+  get stationMode() {
+    return Boolean(this._stationActor && isStationActor(this._stationActor));
+  }
+
+  get title() {
+    if (this.stationMode) {
+      return game.i18n.format("ADVENTURECRAFT.Hub.StationTitle", {
+        name: this._stationActor.name,
+        tier: getStationTier(this._stationActor),
+      });
+    }
+    return game.i18n.localize("ADVENTURECRAFT.Hub.Title");
   }
 
   static get defaultOptions() {
@@ -63,14 +88,27 @@ export class AdventureCraftHub extends FormApplication {
 
     // Enrich recipe ingredients with availability status when actor is present
     const canEditWishlist = this.actor ? canUserEditActorWishlist(this.actor) : false;
+    const stationMode = this.stationMode;
+    const stationTier = stationMode ? getStationTier(this._stationActor) : 0;
+
     const enrichRecipe = this.actor
       ? (r) => {
           const ingredients = enrichIngredients(this.actor, r.ingredients);
           const isWishlisted = isRecipeWishlisted(this.actor, r.id);
+          const stationState = getRecipeStationCraftState(r, this._stationActor);
+          const ingredientsOk = ingredients.every(i => i.status === "ok");
           let base = {
             ...r,
             ingredients,
-            canCraft: ingredients.every(i => i.status === "ok"),
+            canCraft: ingredientsOk && !stationState.locked,
+            stationLocked: stationState.locked,
+            stationTierRequired: stationState.minTier,
+            stationTierHint: stationState.locked
+              ? game.i18n.format("ADVENTURECRAFT.Station.TierRequired", {
+                tier: stationState.minTier,
+                current: stationTier,
+              })
+              : "",
             isWishlisted,
             canEditWishlist,
             showWishlistIndicator: isWishlisted && !canEditWishlist,
@@ -127,7 +165,10 @@ export class AdventureCraftHub extends FormApplication {
 
     return {
       permissions,
-      canCreateRecipe: userCan("createRecipe"),
+      stationMode,
+      stationName: stationMode ? this._stationActor.name : "",
+      stationTier,
+      canCreateRecipe: userCan("createRecipe") && !stationMode,
       actor: this.actor,
       canPostShoppingList,
       wishlistCount,
@@ -153,7 +194,9 @@ export class AdventureCraftHub extends FormApplication {
 
   _filterRecipes(recipes, query, category, bookFilter) {
     const q = query.toLowerCase();
+    const stationMode = this.stationMode;
     return recipes.filter(r => {
+      if (!isRecipeVisibleInHub(r, { stationMode })) return false;
       if (category   && r.category !== category)  return false;
       if (bookFilter && r.bookId   !== bookFilter) return false;
       if (q && !r.name.toLowerCase().includes(q) && !(r.result?.name ?? "").toLowerCase().includes(q)) return false;
@@ -201,7 +244,7 @@ export class AdventureCraftHub extends FormApplication {
       ? RecipeStore._itemToRecipe(actorItem)
       : RecipeStore.get(recipeId);
     if (!recipe) return;
-    await performCraft(actor, recipe);
+    await performCraft(actor, recipe, { stationActor: this._stationActor ?? null });
     this.render();
   }
 

@@ -226,6 +226,8 @@
       "RecipeSaved": "Рецепт сохранён!",
       "RecipeUpdated": "Рецепт обновлён!",
       "MissingIngredients": "Не хватает ингредиентов: {list}",
+      "StationRequired": "Этот рецепт можно крафтить только у станка.",
+      "StationTierTooLow": "Тир станка слишком низкий (нужен тир {tier}).",
       "CraftSuccess": "Создан предмет \"{name}\"{qtyLabel}{critLabel}!",
       "CraftFailed": "Крафт провален!",
       "CraftFailedKeep": "Крафт провален! Ингредиенты сохранены.",
@@ -451,8 +453,21 @@
       "RecipeBookBadge": "Книга рецептов"
     },
 
+    "Station": {
+      "SectionTitle": "Станок крафта",
+      "SectionHint": "Если включено, рецепт можно крафтить только у токена станка (не из обычного Hub).",
+      "RequiresStation": "Требует станок для крафта",
+      "MinTier": "Мин. тир станка",
+      "OpenHub": "Крафт у станка",
+      "SelectCharacter": "Выберите персонажа",
+      "SelectCharacterTitle": "Персонаж для крафта",
+      "TierRequired": "Нужен станок тира {tier} (этот станок: {current})"
+    },
+
     "Hub": {
       "Title": "AdventureCraft Хаб",
+      "StationTitle": "{name} — тир {tier}",
+      "StationBanner": "Крафт у {name} (тир {tier})",
       "ManageBooks": "Книги",
       "Export": "Экспортировать все рецепты",
       "Import": "Импортировать рецепты из JSON",

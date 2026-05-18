@@ -225,6 +225,8 @@
       "RecipeSaved": "Recipe saved!",
       "RecipeUpdated": "Recipe updated!",
       "MissingIngredients": "Missing ingredients: {list}",
+      "StationRequired": "This recipe must be crafted at a station.",
+      "StationTierTooLow": "This station is too low tier (requires tier {tier}).",
       "CraftSuccess": "Crafted \"{name}\"{qtyLabel}{critLabel}!",
       "CraftFailed": "Craft failed!",
       "CraftFailedKeep": "Craft failed! Ingredients kept.",
@@ -450,8 +452,21 @@
       "RecipeBookBadge": "Recipe Book"
     },
 
+    "Station": {
+      "SectionTitle": "Crafting station",
+      "SectionHint": "If enabled, this recipe can only be crafted at a station token (not from the normal Hub).",
+      "RequiresStation": "Requires station to craft",
+      "MinTier": "Minimum station tier",
+      "OpenHub": "Craft at station",
+      "SelectCharacter": "Choose character",
+      "SelectCharacterTitle": "Crafting character",
+      "TierRequired": "Requires station tier {tier} (this station: {current})"
+    },
+
     "Hub": {
       "Title": "AdventureCraft Hub",
+      "StationTitle": "{name} — tier {tier}",
+      "StationBanner": "Crafting at {name} (tier {tier})",
       "ManageBooks": "Books",
       "Export": "Export all recipes",
       "Import": "Import recipes from JSON",

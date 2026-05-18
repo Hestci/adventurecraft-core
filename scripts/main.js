@@ -43,6 +43,17 @@ import {
   postOriginToChat,
   isRecordCraftingOriginEnabled,
 } from "./crafting-origin-utils.js";
+import {
+  isStationActor,
+  getStationTier,
+  getStationData,
+  getRecipeStations,
+  normalizeRecipeStations,
+  isRecipeVisibleInHub,
+  canCraftRecipeAtStation,
+  openStationHub,
+  resolveCraftingActor,
+} from "./station-utils.js";
 
 const moduleApi = {
   CORE_ID,
@@ -88,6 +99,15 @@ const moduleApi = {
   hasCraftOrigin,
   postOriginToChat,
   isRecordCraftingOriginEnabled,
+  isStationActor,
+  getStationTier,
+  getStationData,
+  getRecipeStations,
+  normalizeRecipeStations,
+  isRecipeVisibleInHub,
+  canCraftRecipeAtStation,
+  openStationHub,
+  resolveCraftingActor,
 };
 
 Hooks.once("init", () => {
