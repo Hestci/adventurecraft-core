@@ -1,5 +1,6 @@
 import { CORE_ID } from "../constants.js";
 import { getAdapter } from "../api/system-adapter.js";
+import { normalizeMasteryTiers } from "../mastery-utils.js";
 import {
   getModuleFlag,
   getRecipeData,
@@ -17,22 +18,17 @@ export class RecipeStore {
     if (!m || m.enabled !== true) return null;
     const th = Math.floor(Number(m.masteryThreshold) || 0);
     if (th < 1) return null;
+    const tiers = normalizeMasteryTiers(m.tiers, th);
     return {
       enabled: true,
       masteryThreshold: th,
       allowCritRoll: m.allowCritRoll === true,
+      ...(tiers?.length ? { tiers } : {}),
     };
   }
 
   static _normalizeMasteryForSave(m) {
-    if (!m || m.enabled !== true) return null;
-    const th = Math.floor(Number(m.masteryThreshold) || 0);
-    if (th < 1) return null;
-    return {
-      enabled: true,
-      masteryThreshold: th,
-      allowCritRoll: m.allowCritRoll === true,
-    };
+    return RecipeStore._normalizeMasteryFromData(m);
   }
 
   static _itemToRecipe(item) {

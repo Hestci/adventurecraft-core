@@ -85,6 +85,9 @@
                         <span class="ac-mastery-badge"><i class="fas fa-award"></i> {{localize "ADVENTURECRAFT.Mastery.BadgeMaster"}}</span>
                       {{else}}
                         <span class="ac-mastery-count"><i class="fas fa-hammer"></i> {{this.masteryProgressLabel}}</span>
+                        {{#if this.masteryDcHint}}
+                          <span class="ac-mastery-dc"><i class="fas fa-dice-d20"></i> {{this.masteryDcHint}}</span>
+                        {{/if}}
                       {{/if}}
                     </div>
                     {{/if}}
@@ -148,6 +151,9 @@
                       <span class="ac-mastery-badge"><i class="fas fa-award"></i> {{localize "ADVENTURECRAFT.Mastery.BadgeMaster"}}</span>
                     {{else}}
                       <span class="ac-mastery-count"><i class="fas fa-hammer"></i> {{this.masteryProgressLabel}}</span>
+                      {{#if this.masteryDcHint}}
+                        <span class="ac-mastery-dc"><i class="fas fa-dice-d20"></i> {{this.masteryDcHint}}</span>
+                      {{/if}}
                     {{/if}}
                   </div>
                   {{/if}}

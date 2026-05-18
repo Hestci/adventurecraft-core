@@ -9,11 +9,13 @@ import {
 } from "./crit-pool.js";
 import { _log } from "./ac-debug-log.js";
 import {
+  getMasteryDcReduction,
   incrementMasteryCount,
   isMasteryGuaranteed,
   masteryAllowsCritRoll,
 } from "./mastery-utils.js";
 import { escapeHtml } from "./html-utils.js";
+import { assertActorCanCraft, denyCraftActor } from "./craft-guards.js";
 
 export { pickCritPoolOption, validateCritPoolConfig, normalizePoolEntry, formatPoolOptionLabel };
 
@@ -28,6 +30,10 @@ export function pickCritQualityWord() {
 }
 
 export function findIngredientItem(actor, ing) {
+  if (ing.uuid) {
+    const byUuid = actor.items.find(i => i.uuid === ing.uuid);
+    if (byUuid) return byUuid;
+  }
   const byName = actor.items.find(i => i.name === ing.name);
   if (byName) return byName;
   if (!ing.tags?.length) return null;
@@ -92,13 +98,15 @@ export async function performCheck(actor, recipe) {
     const rolled = await getAdapter().rollCraftCheck(actor, recipe);
     if (rolled.fail) return rolled.fail;
 
-    const { roll, dc, threshold } = rolled;
-    const critSuccess = roll.total >= dc + threshold;
-    const success = rollForCritOnly ? true : roll.total >= dc;
-    const critFail = rollForCritOnly ? false : (!success && roll.total <= dc - threshold);
+    const { roll, dc: baseDc, threshold } = rolled;
+    const dcReduction = getMasteryDcReduction(actor, recipe);
+    const effectiveDc = Math.max(1, baseDc - dcReduction);
+    const critSuccess = roll.total >= effectiveDc + threshold;
+    const success = rollForCritOnly ? true : roll.total >= effectiveDc;
+    const critFail = rollForCritOnly ? false : (!success && roll.total <= effectiveDc - threshold);
 
     _log.log(
-      `AdventureCraft | performCheck: rolled=${roll.total} vs DC=${dc} → success=${success} crit=${critSuccess}`,
+      `AdventureCraft | performCheck: rolled=${roll.total} vs DC=${effectiveDc} (base ${baseDc}, mastery -${dcReduction}) → success=${success} crit=${critSuccess}`,
     );
 
     return {
@@ -155,6 +163,10 @@ export function critSuccessChangesProperties(recipe, poolPick) {
 }
 
 export async function runCraftExecution(actor, recipe) {
+  if (!assertActorCanCraft(actor)) {
+    denyCraftActor();
+    return false;
+  }
   const adapter = getAdapter();
   const { success, consume, critSuccess, critFail } = await performCheck(actor, recipe);
 
@@ -285,10 +297,25 @@ export function formatCraftConfirmCheckParagraph(actor, recipe) {
   const checkTypeLabel = game.i18n.localize(
     `ADVENTURECRAFT.Check.Type${recipe.check.type.charAt(0).toUpperCase()}${recipe.check.type.slice(1)}`,
   );
-  return `<p><em>${game.i18n.format("ADVENTURECRAFT.Dialog.ConfirmCraftWithCheck", { type: checkTypeLabel, dc: recipe.check.dc })}</em></p>`;
+  const baseDc = recipe.check.dc;
+  const dcReduction = getMasteryDcReduction(actor, recipe);
+  if (dcReduction > 0) {
+    const effectiveDc = Math.max(1, baseDc - dcReduction);
+    return `<p><em>${game.i18n.format("ADVENTURECRAFT.Dialog.ConfirmCraftWithCheckReduced", {
+      type: checkTypeLabel,
+      dc: effectiveDc,
+      baseDc,
+      reduction: dcReduction,
+    })}</em></p>`;
+  }
+  return `<p><em>${game.i18n.format("ADVENTURECRAFT.Dialog.ConfirmCraftWithCheck", { type: checkTypeLabel, dc: baseDc })}</em></p>`;
 }
 
 export async function performCraft(actor, recipe) {
+  if (!assertActorCanCraft(actor)) {
+    denyCraftActor();
+    return false;
+  }
   const missing = checkIngredients(actor, recipe.ingredients);
   if (missing.length) {
     const list = missing.map(m => `${m.name} ×${m.needed} (${m.have})`).join(", ");

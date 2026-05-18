@@ -1,12 +1,13 @@
 import { RecipeStore } from "../data/RecipeStore.js";
-import { runCraftExecution, formatCraftConfirmCheckParagraph } from "../crafting-utils.js";
+import {
+  runCraftExecution,
+  formatCraftConfirmCheckParagraph,
+  findIngredientItem,
+} from "../crafting-utils.js";
 import { userCan, denyAndWarn, getAllPermissions } from "../permissions.js";
+import { assertActorCanCraft, denyCraftActor } from "../craft-guards.js";
 import { escapeHtml } from "../html-utils.js";
 import { parseRecipeImportJson } from "../recipe-import-utils.js";
-
-import { CORE_ID } from "../constants.js";
-
-const MODULE_ID = CORE_ID;
 
 export class RecipeBrowser extends FormApplication {
   constructor(actor, options = {}) {
@@ -89,6 +90,7 @@ export class RecipeBrowser extends FormApplication {
       ui.notifications.warn(game.i18n.localize("ADVENTURECRAFT.Message.NoActorSelected"));
       return;
     }
+    if (!assertActorCanCraft(actor)) return denyCraftActor();
 
     const missing = this._checkIngredients(actor, recipe.ingredients);
     if (missing.length) {
@@ -113,22 +115,15 @@ export class RecipeBrowser extends FormApplication {
     this.render();
   }
 
-  _findIngredientItem(actor, ing) {
-    const byName = actor.items.find(i => i.name === ing.name);
-    if (byName) return byName;
-    if (!ing.tags?.length) return null;
-    return actor.items.find(i => {
-      const itemTags = i.getFlag(MODULE_ID, "tags") ?? [];
-      return ing.tags.some(t => itemTags.includes(t));
-    });
-  }
-
   _checkIngredients(actor, ingredients) {
     const missing = [];
+    const adapter = game.adventurecraft?.getAdapter?.() ?? null;
     for (const ing of ingredients) {
       const needed = ing.quantity ?? 1;
-      const found = this._findIngredientItem(actor, ing);
-      const have = found?.system?.quantity ?? (found ? 1 : 0);
+      const found = findIngredientItem(actor, ing);
+      const have = found
+        ? (adapter?.getItemQuantity?.(found) ?? found.system?.quantity ?? 1)
+        : 0;
       if (!found || have < needed) {
         const label = ing.tags?.length
           ? game.i18n.format("ADVENTURECRAFT.Message.IngredientWithTags", { name: ing.name, tags: ing.tags.join(", ") })

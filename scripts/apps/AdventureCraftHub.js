@@ -1,8 +1,9 @@
 import { RecipeStore } from "../data/RecipeStore.js";
 import { isRecipeItem } from "../flag-utils.js";
 import { performCraft, enrichIngredients } from "../crafting-utils.js";
-import { getMasteryProgress } from "../mastery-utils.js";
+import { getMasteryDisplay } from "../mastery-utils.js";
 import { userCan, getAllPermissions, denyAndWarn } from "../permissions.js";
+import { assertActorCanCraft, denyCraftActor } from "../craft-guards.js";
 import { escapeHtml } from "../html-utils.js";
 import { parseRecipeImportJson } from "../recipe-import-utils.js";
 
@@ -58,14 +59,23 @@ export class AdventureCraftHub extends FormApplication {
           const base = { ...r, ingredients, canCraft: ingredients.every(i => i.status === "ok") };
           const masteryOk = r.mastery?.enabled === true && r.check?.type && Number(r.mastery.masteryThreshold) > 0;
           if (!masteryOk) return base;
-          const { count } = getMasteryProgress(this.actor, r);
-          const th = Number(r.mastery.masteryThreshold);
+          const disp = getMasteryDisplay(this.actor, r);
+          const masteryDcHint = !disp.isMaster && disp.dcReduction > 0 && disp.effectiveDc != null
+            ? game.i18n.format("ADVENTURECRAFT.Mastery.DcReductionHint", {
+              reduction: disp.dcReduction,
+              effectiveDc: disp.effectiveDc,
+            })
+            : "";
           return {
             ...base,
-            masteryCount: count,
-            masteryThreshold: th,
-            masteryIsMaster: count >= th,
-            masteryProgressLabel: game.i18n.format("ADVENTURECRAFT.Mastery.Progress", { count, threshold: th }),
+            masteryCount: disp.count,
+            masteryThreshold: disp.threshold,
+            masteryIsMaster: disp.isMaster,
+            masteryProgressLabel: game.i18n.format("ADVENTURECRAFT.Mastery.Progress", {
+              count: disp.count,
+              threshold: disp.threshold,
+            }),
+            masteryDcHint,
           };
         }
       : (r) => r;
@@ -154,6 +164,7 @@ export class AdventureCraftHub extends FormApplication {
       ui.notifications.warn(game.i18n.localize("ADVENTURECRAFT.Message.NoActiveCharacter"));
       return;
     }
+    if (!assertActorCanCraft(actor)) return denyCraftActor();
     // Hub recipes come from actor.items, not game.items
     const actorItem = actor.items.get(recipeId);
     const recipe = actorItem && isRecipeItem(actorItem)

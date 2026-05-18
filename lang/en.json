@@ -139,6 +139,7 @@
       "ConfirmCraftTitle": "Confirm Craft",
       "ConfirmCraftContent": "Craft <strong>{name}</strong> using ingredients?",
       "ConfirmCraftWithCheck": "Requires {type} check (DC {dc}).",
+      "ConfirmCraftWithCheckReduced": "Requires {type} check (DC {dc}, base DC {baseDc}, mastery −{reduction}).",
       "ConfirmCraftMasteryGuaranteed": "You have mastered this recipe — the craft check succeeds automatically (no roll, no critical success).",
       "ConfirmCraftMasteryCritRoll": "You have mastered this recipe — success is automatic. A check will be rolled for critical success only (failure is not possible).",
       "DeleteRecipeTitle": "Delete Recipe",
@@ -162,7 +163,13 @@
       "ThresholdHint": "Successful crafts needed before the check auto-succeeds.",
       "Progress": "{count} / {threshold}",
       "BadgeMaster": "Mastered",
-      "AllowCritRoll": "At mastery: roll for critical success (success is still automatic)"
+      "AllowCritRoll": "At mastery: roll for critical success (success is still automatic)",
+      "TiersTitle": "DC reduction tiers",
+      "TiersHint": "After this many successful crafts, subtract from the check DC. Tiers apply before the mastery threshold (guaranteed success).",
+      "TierCrafts": "Successful crafts",
+      "TierDcReduction": "DC reduction",
+      "AddTier": "Add tier",
+      "DcReductionHint": "DC −{reduction} (effective {effectiveDc})"
     },
 
     "Message": {
@@ -418,7 +425,17 @@
       "CritPoolSizeRow": "Invalid size table row #{row}.",
       "CritPoolSizeRowRange": "Size table row #{row}: min cannot exceed max.",
       "CritPoolSizeJson": "Size table must be valid JSON array.",
-      "MasteryNeedsCheck": "Enable a craft check before using recipe mastery."
+      "MasteryNeedsCheck": "Enable a craft check before using recipe mastery.",
+      "MasteryTierCountsOrder": "Mastery tier craft counts must increase.",
+      "MasteryTierAtThreshold": "Each tier must require fewer crafts than the mastery threshold.",
+      "CombineActorInventoryOnly": "Combine only accepts items already in this character's inventory.",
+      "CombineRequiresActor": "Select a character before combining items.",
+      "CombineSourceNotInInventory": "A source item is no longer in the character's inventory. Remove it and try again.",
+      "NotActorOwner": "You can only craft or combine items for characters you own."
+    },
+
+    "Warning": {
+      "MasteryTierDcOrder": "Later mastery tiers usually should not reduce DC less than earlier tiers."
     }
   }
 }

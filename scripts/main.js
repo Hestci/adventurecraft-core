@@ -4,7 +4,9 @@ import { AdventureCraftHub } from "./apps/AdventureCraftHub.js";
 import { RecipeBrowser } from "./apps/RecipeBrowser.js";
 import { AdventureCraftSettings } from "./apps/AdventureCraftSettings.js";
 import { RecipeStore } from "./data/RecipeStore.js";
-import { PERMISSION_KEYS, PERMISSION_DEFAULTS, ROLE_I18N, userCan, getAllPermissions } from "./permissions.js";
+import { PERMISSION_KEYS, PERMISSION_DEFAULTS, ROLE_I18N, userCan, userCanForUser, getAllPermissions } from "./permissions.js";
+import { assertActorCanCraft, denyCraftActor } from "./craft-guards.js";
+import { registerDocumentGuards } from "./document-guards.js";
 import {
   performCraft,
   runCraftExecution,
@@ -16,6 +18,7 @@ import {
 } from "./crafting-utils.js";
 import { escapeHtml } from "./html-utils.js";
 import { parseRecipeImportJson } from "./recipe-import-utils.js";
+import { normalizeMasteryTiers } from "./mastery-utils.js";
 
 const moduleApi = {
   CORE_ID,
@@ -30,6 +33,9 @@ const moduleApi = {
   runCraftExecution,
   enrichIngredients,
   userCan,
+  userCanForUser,
+  assertActorCanCraft,
+  denyCraftActor,
   getAllPermissions,
   pickCritPoolOption,
   validateCritPoolConfig,
@@ -37,6 +43,7 @@ const moduleApi = {
   formatPoolOptionLabel,
   escapeHtml,
   parseRecipeImportJson,
+  normalizeMasteryTiers,
 };
 
 Hooks.once("init", () => {
@@ -97,6 +104,8 @@ Hooks.once("init", () => {
     type: AdventureCraftSettings,
     restricted: true,
   });
+
+  registerDocumentGuards();
 });
 
 Hooks.once("ready", () => {

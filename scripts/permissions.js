@@ -35,8 +35,19 @@ export function getPermissionMinimum(operation) {
 }
 
 export function userCan(operation) {
+  return userCanForUser(game.user?.id, operation);
+}
+
+/**
+ * @param {string} userId
+ * @param {string} operation
+ * @returns {boolean}
+ */
+export function userCanForUser(userId, operation) {
+  const user = game.users.get(userId);
+  if (!user?.active) return false;
   const minRole = getPermissionMinimum(operation);
-  const role = Number(game.user.role);
+  const role = Number(user.role);
   if (!Number.isInteger(role) || role < 1 || role > 4) return false;
   return role >= minRole;
 }
